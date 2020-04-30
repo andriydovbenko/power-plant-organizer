@@ -31,18 +31,18 @@ public abstract class Storage {
             int excessAmount = totalAmountAfterAdding - capacity;
             resource.setAmount(capacity);
 
-            throw new NotEnoughStorageSpaceException("You tried to add to storage to many Coal" +
-                    "\nAfter operation losses account for " + excessAmount + " tons of Coal");
+            throw new NotEnoughStorageSpaceException("Attempt adding too many resources into the storage." +
+                    " Capacity of repository = \"" + capacity + "\"" +
+                    " After operation Power Plant lost " + excessAmount + " tons of Coal");
         }
-    }
-
-
-    public StorableResource getResource() {
-        return resource;
     }
 
     public void setResource(StorableResource resource) {
         this.resource = resource;
+    }
+
+    public StorableResource getResource() {
+        return resource;
     }
 
     public int getCapacity() {
