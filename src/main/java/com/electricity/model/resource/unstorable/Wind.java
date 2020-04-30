@@ -1,4 +1,4 @@
-package com.electricity.model.resource.impl;
+package com.electricity.model.resource.unstorable;
 
 import com.electricity.model.resource.UnstorableResource;
 

@@ -1,17 +1,17 @@
-package com.electricity.model.resource.impl;
+package com.electricity.model.resource.storable;
 
 import com.electricity.model.resource.StorableResource;
 
 import java.util.Objects;
 import java.util.UUID;
 
-public class Uranium implements StorableResource {
+public class Coal implements StorableResource {
     private String id;
     private int amount;
 
-    public Uranium(int amount) {
-        this.amount = amount;
+    public Coal(int amount) {
         this.id = UUID.randomUUID().toString();
+        this.amount = amount;
     }
 
     @Override
@@ -36,12 +36,20 @@ public class Uranium implements StorableResource {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Uranium uranium = (Uranium) o;
-        return id.equals(uranium.id);
+        Coal coal = (Coal) o;
+        return id.equals(coal.id);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Coal{" +
+                "id='" + id + '\'' +
+                ", amount=" + amount +
+                '}';
     }
 }
