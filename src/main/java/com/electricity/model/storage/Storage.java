@@ -37,7 +37,7 @@ public abstract class Storage {
         }
     }
 
-    public void setResource(StorableResource resource) {
+    public void initializeResource(StorableResource resource) {
         this.resource = resource;
     }
 
