@@ -1,7 +1,6 @@
 package com.electricity.model.storage.impl;
 
 import com.electricity.exeption.NotEnoughStorageSpaceException;
-import com.electricity.model.resource.storable.Coal;
 import com.electricity.model.resource.storable.Water;
 import org.junit.jupiter.api.Test;
 
