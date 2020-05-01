@@ -26,7 +26,8 @@ public class ResourceMarketImpl implements ResourceMarket {
     @Override
     public ResourceTransaction setPriceOfTransaction(ResourceTransaction resourceTransaction) {
 
-        return transactionMethods.getOrDefault(resourceTransaction.getResourceType(), this::throwUnknownResourceTypeException)
+        return transactionMethods.getOrDefault(
+                resourceTransaction.getResourceType(), this::throwUnknownResourceTypeException)
                 .setPriceOfTransaction(resourceTransaction);
     }
 

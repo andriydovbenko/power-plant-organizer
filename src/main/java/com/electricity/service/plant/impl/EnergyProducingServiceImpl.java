@@ -32,7 +32,6 @@ public class EnergyProducingServiceImpl implements EnergyProducingService {
     }
 
     private double useStorageCapablePlants(PowerPlant powerPlant) {
-
         StorageCapableAbstractPlant plant = (StorageCapableAbstractPlant) powerPlant;
 
         int totalResourceAmount = plant.getStorage().getResource().getAmount();
