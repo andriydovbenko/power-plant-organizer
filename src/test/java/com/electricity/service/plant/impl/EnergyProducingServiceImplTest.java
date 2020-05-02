@@ -1,5 +1,8 @@
 package com.electricity.service.plant.impl;
 
+import com.electricity.enumeration.MaxPower;
+import com.electricity.enumeration.ResourceConsumption;
+import com.electricity.model.plant.PowerPlant;
 import com.electricity.model.plant.impl.*;
 import com.electricity.model.resource.storable.Coal;
 import com.electricity.model.resource.storable.Uranium;
@@ -22,8 +25,8 @@ class EnergyProducingServiceImplTest {
     @Test
     void produceOnEnergyOnCoalPowerPlant() {
         //Given
-        int resourceAmount = 100;
-        Coal coal = new Coal(resourceAmount);
+        int resourceAmountForOneCircle = ResourceConsumption.COAL.getConsumption();
+        Coal coal = new Coal(resourceAmountForOneCircle);
         CoalStorage coalStorage = new CoalStorage();
         coalStorage.initializeResource(coal);
         CoalFiredPowerPlant powerPlant = new CoalFiredPowerPlant(coalStorage);
@@ -33,7 +36,7 @@ class EnergyProducingServiceImplTest {
         double producedEnergyWithZeroResources = service.produceEnergy(powerPlant);
 
         //Then
-        double expectedEnergy = 30.20;
+        double expectedEnergy = MaxPower.COAL.getPower();
         assertEquals(expectedEnergy, producedEnergy);
 
         assertEquals(expectedResourceAmountAfterProducingEnergy, powerPlant.getStorage().getAmountOfResource());
@@ -44,8 +47,8 @@ class EnergyProducingServiceImplTest {
     @Test
     void produceOnEnergyOnNuclearPowerPlant() {
         //Given
-        int resourceAmount = 20;
-        Uranium uranium = new Uranium(resourceAmount);
+        int resourceAmountForOneCircle = ResourceConsumption.NUCLEAR.getConsumption();
+        Uranium uranium = new Uranium(resourceAmountForOneCircle);
         UraniumStorage uraniumStorage = new UraniumStorage();
         uraniumStorage.initializeResource(uranium);
         NuclearPowerPlan powerPlant = new NuclearPowerPlan(uraniumStorage);
@@ -55,7 +58,7 @@ class EnergyProducingServiceImplTest {
         double producedEnergyWithZeroResources = service.produceEnergy(powerPlant);
 
         //Then
-        double expectedEnergy = 55.2;
+        double expectedEnergy = MaxPower.NUCLEAR.getPower();
         assertEquals(expectedEnergy, producedEnergy);
 
         assertEquals(expectedResourceAmountAfterProducingEnergy, powerPlant.getStorage().getAmountOfResource());
@@ -66,8 +69,8 @@ class EnergyProducingServiceImplTest {
     @Test
     void produceOnEnergyHydroPowerPlant() {
         //Given
-        int resourceVolume = 50_000;
-        Water water = new Water(resourceVolume);
+        int resourceAmountForOneCircle = ResourceConsumption.HYDRO.getConsumption();
+        Water water = new Water(resourceAmountForOneCircle);
         WaterReservoir waterReservoir = new WaterReservoir();
         waterReservoir.initializeResource(water);
         HydroPowerPlant powerPlant = new HydroPowerPlant(waterReservoir);
@@ -77,7 +80,7 @@ class EnergyProducingServiceImplTest {
         double producedEnergyWithZeroResources = service.produceEnergy(powerPlant);
 
         //Then
-        double expectedEnergy = 15.5;
+        double expectedEnergy = MaxPower.HYDRO.getPower();
         assertEquals(expectedEnergy, producedEnergy);
 
         assertEquals(expectedResourceAmountAfterProducingEnergy, powerPlant.getStorage().getAmountOfResource());
@@ -88,8 +91,8 @@ class EnergyProducingServiceImplTest {
     @Test
     void produceOnEnergyOnSolarPowerPlant() {
         //Given
-        int workingTimeLeft = 1;
-        SolarEnergy solarEnergy = new SolarEnergy(workingTimeLeft);
+        int resourceAmountForOneCircle = ResourceConsumption.SOLAR.getConsumption();
+        SolarEnergy solarEnergy = new SolarEnergy(resourceAmountForOneCircle);
         SolarPowerPlant powerPlant = new SolarPowerPlant(solarEnergy);
 
         //When
@@ -97,7 +100,7 @@ class EnergyProducingServiceImplTest {
         double producedEnergyWithZeroResources = service.produceEnergy(powerPlant);
 
         //Then
-        double expectedEnergy = 5.05;
+        double expectedEnergy = MaxPower.SOLAR.getPower();
         assertEquals(expectedEnergy, producedEnergy);
 
         assertEquals(expectedResourceAmountAfterProducingEnergy, powerPlant.getResource().getWorkTimeLeft());
@@ -108,8 +111,8 @@ class EnergyProducingServiceImplTest {
     @Test
     void produceOnEnergyOnWindPowerPlant() {
         //Given
-        int workingTimeLeft = 1;
-        Wind wind = new Wind(workingTimeLeft);
+        int resourceAmountForOneCircle = ResourceConsumption.WIND.getConsumption();
+        Wind wind = new Wind(resourceAmountForOneCircle);
         WindPowerPlant powerPlant = new WindPowerPlant(wind);
 
         //When
@@ -117,7 +120,7 @@ class EnergyProducingServiceImplTest {
         double producedEnergyWithZeroResources = service.produceEnergy(powerPlant);
 
         //Then
-        double expectedEnergy = 7.02;
+        double expectedEnergy = MaxPower.WIND.getPower();
         assertEquals(expectedEnergy, producedEnergy);
 
         assertEquals(expectedResourceAmountAfterProducingEnergy, powerPlant.getResource().getWorkTimeLeft());
