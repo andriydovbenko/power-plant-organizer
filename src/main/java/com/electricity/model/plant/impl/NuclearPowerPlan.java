@@ -1,12 +1,14 @@
 package com.electricity.model.plant.impl;
 
+import com.electricity.enumeration.MaxPower;
 import com.electricity.enumeration.PowerPlantType;
+import com.electricity.enumeration.ResourceConsumption;
 import com.electricity.model.plant.StorageCapableAbstractPlant;
 import com.electricity.model.storage.Storage;
 
 import java.util.Objects;
 
-public class NuclearPowerPlan  extends StorageCapableAbstractPlant {
+public class NuclearPowerPlan extends StorageCapableAbstractPlant {
     private final double maxPower;
     private final PowerPlantType type;
 
@@ -14,9 +16,9 @@ public class NuclearPowerPlan  extends StorageCapableAbstractPlant {
 
     public NuclearPowerPlan(Storage storage) {
         super(storage);
-        this.maxPower = 55.2;
-        this.type =  PowerPlantType.NUCLEAR;
-        this.resourceConsumption = 20;
+        this.maxPower = MaxPower.NUCLEAR.getPower();
+        this.type = PowerPlantType.NUCLEAR;
+        this.resourceConsumption = ResourceConsumption.NUCLEAR.getConsumption();
     }
 
     @Override

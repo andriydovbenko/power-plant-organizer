@@ -1,6 +1,6 @@
 package com.electricity.service.plant.impl;
 
-import com.electricity.enumeration.InitialWorkTimeForUnstorableResource;
+import com.electricity.enumeration.InitialWorkTimeForUnstorablePowerPlant;
 import com.electricity.enumeration.PowerPlantType;
 import com.electricity.exeption.UnknownPowerPlantTypeException;
 import com.electricity.model.dto.impl.PowerPlantCreatingDto;
@@ -77,7 +77,7 @@ public class PowerPlantConstructorImpl implements PowerPlantConstructor {
     }
 
     private PowerPlant constructNewSolar(PowerPlantCreatingDto powerPlantCreatingDto) {
-        int workTimeLeft = InitialWorkTimeForUnstorableResource.SOLAR.getWorkTimeLeft();
+        int workTimeLeft = InitialWorkTimeForUnstorablePowerPlant.SOLAR.getWorkTimeLeft();
 
         SolarPowerPlant powerPlant = new SolarPowerPlant(new SolarEnergy(workTimeLeft));
 
@@ -89,7 +89,7 @@ public class PowerPlantConstructorImpl implements PowerPlantConstructor {
     }
 
     private PowerPlant constructNewWind(PowerPlantCreatingDto powerPlantCreatingDto) {
-        int workTimeLeft = InitialWorkTimeForUnstorableResource.WIND.getWorkTimeLeft();
+        int workTimeLeft = InitialWorkTimeForUnstorablePowerPlant.WIND.getWorkTimeLeft();
 
         WindPowerPlant powerPlant = new WindPowerPlant(new Wind(workTimeLeft));
 

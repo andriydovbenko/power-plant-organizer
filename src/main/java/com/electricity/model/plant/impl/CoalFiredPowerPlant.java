@@ -1,6 +1,8 @@
 package com.electricity.model.plant.impl;
 
+import com.electricity.enumeration.MaxPower;
 import com.electricity.enumeration.PowerPlantType;
+import com.electricity.enumeration.ResourceConsumption;
 import com.electricity.model.plant.StorageCapableAbstractPlant;
 import com.electricity.model.storage.Storage;
 
@@ -15,8 +17,8 @@ public class CoalFiredPowerPlant extends StorageCapableAbstractPlant {
     public CoalFiredPowerPlant(Storage storage) {
         super(storage);
         this.type = PowerPlantType.COAL;
-        this.maxPower = 30.20;
-        this.resourceConsumption = 100;
+        this.maxPower = MaxPower.COAL.getPower();
+        this.resourceConsumption = ResourceConsumption.COAL.getConsumption();
     }
 
     public PowerPlantType getType() {

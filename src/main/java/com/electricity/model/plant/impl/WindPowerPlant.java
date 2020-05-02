@@ -1,6 +1,8 @@
 package com.electricity.model.plant.impl;
 
+import com.electricity.enumeration.MaxPower;
 import com.electricity.enumeration.PowerPlantType;
+import com.electricity.enumeration.ResourceConsumption;
 import com.electricity.model.plant.StorageIncapableAbstractPlant;
 import com.electricity.model.resource.UnstorableResource;
 
@@ -14,9 +16,9 @@ public class WindPowerPlant extends StorageIncapableAbstractPlant {
 
     public WindPowerPlant(UnstorableResource resource) {
         super(resource);
-        this.maxPower = 7.02;
+        this.maxPower = MaxPower.WIND.getPower();
         this.type = PowerPlantType.WIND;
-        this.resourceConsumption = 1;
+        this.resourceConsumption = ResourceConsumption.WIND.getConsumption();
     }
 
     @Override
