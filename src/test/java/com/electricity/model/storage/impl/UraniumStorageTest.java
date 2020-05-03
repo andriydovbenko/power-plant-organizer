@@ -8,11 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UraniumStorageTest {
     private final int initialAmount = 500;
-    private final Uranium uranium;
     private final UraniumStorage uraniumStorage;
 
     UraniumStorageTest() {
-        this.uranium = new Uranium(initialAmount);
+        Uranium uranium = new Uranium(initialAmount);
         this.uraniumStorage = new UraniumStorage();
         this.uraniumStorage.initializeResource(uranium);
     }
@@ -34,13 +33,5 @@ class UraniumStorageTest {
     void getCapacity() {
         int expectedCapacity = 1000;
         assertEquals(expectedCapacity, uraniumStorage.getCapacity());
-    }
-
-    @Test
-    void getId() {
-        assertNotEquals(null, uranium.getId());
-
-        int expectedIdLength = 36;
-        assertEquals(expectedIdLength, uranium.getId().length());
     }
 }

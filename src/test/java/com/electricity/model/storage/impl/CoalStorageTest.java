@@ -8,11 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CoalStorageTest {
     private final int initialAmount = 5000;
-    private final Coal coal;
     private final CoalStorage coalStorage;
 
     CoalStorageTest() {
-        this.coal = new Coal(initialAmount);
+        Coal coal = new Coal(initialAmount);
         this.coalStorage = new CoalStorage();
         this.coalStorage.initializeResource(coal);
     }
@@ -34,13 +33,5 @@ class CoalStorageTest {
     void getCapacity() {
         int expectedCapacity = 10000;
         assertEquals(expectedCapacity, coalStorage.getCapacity());
-    }
-
-    @Test
-    void getId() {
-        assertNotEquals(null, coal.getId());
-
-        int expectedIdLength = 36;
-        assertEquals(expectedIdLength, coal.getId().length());
     }
 }

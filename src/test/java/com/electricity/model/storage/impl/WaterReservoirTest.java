@@ -8,11 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WaterReservoirTest {
     private final int initialAmount = 6_000_000;
-    private final Water water;
     private final WaterReservoir waterReservoir;
 
     WaterReservoirTest() {
-        this.water = new Water(initialAmount);
+        Water water = new Water(initialAmount);
         this.waterReservoir = new WaterReservoir();
         this.waterReservoir.initializeResource(water);
     }
@@ -34,13 +33,5 @@ class WaterReservoirTest {
     void getCapacity() {
         int expectedCapacity = 10_000_000;
         assertEquals(expectedCapacity, waterReservoir.getCapacity());
-    }
-
-    @Test
-    void getId() {
-        assertNotEquals(null, water.getId());
-
-        int expectedIdLength = 36;
-        assertEquals(expectedIdLength, water.getId().length());
     }
 }
