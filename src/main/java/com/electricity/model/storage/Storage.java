@@ -3,18 +3,12 @@ package com.electricity.model.storage;
 import com.electricity.exeption.NotEnoughStorageSpaceException;
 import com.electricity.model.resource.StorableResource;
 
-import java.util.Objects;
-import java.util.UUID;
-
 public abstract class Storage {
-    private String id;
-
     private StorableResource resource;
     private int capacity;
 
     public Storage(int capacity) {
         this.capacity = capacity;
-        this.id = UUID.randomUUID().toString();
     }
 
     public int getAmountOfResource() {
@@ -53,31 +47,9 @@ public abstract class Storage {
         this.capacity = capacity;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Storage storage = (Storage) o;
-        return id.equals(storage.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
     @Override
     public String toString() {
         return "Storage{" +
-                "id='" + id + '\'' +
                 ", resource=" + resource +
                 ", capacity=" + capacity +
                 '}';

@@ -9,15 +9,24 @@ import com.electricity.model.resource.UnstorableResource;
 import java.util.Objects;
 
 public class WindPowerPlant extends StorageIncapableAbstractPlant {
-    private final double maxPower;
     private final PowerPlantType type;
 
+    private double maxPower;
     private int resourceConsumption;
+
+    public WindPowerPlant() {
+        this.type = PowerPlantType.WIND;
+        initPowerAndConsumption();
+    }
 
     public WindPowerPlant(UnstorableResource resource) {
         super(resource);
-        this.maxPower = MaxPower.WIND.getPower();
         this.type = PowerPlantType.WIND;
+        initPowerAndConsumption();
+    }
+
+    private void initPowerAndConsumption() {
+        this.maxPower = MaxPower.WIND.getPower();
         this.resourceConsumption = ResourceConsumption.WIND.getConsumption();
     }
 
@@ -29,6 +38,10 @@ public class WindPowerPlant extends StorageIncapableAbstractPlant {
     @Override
     public double getMaxPower() {
         return maxPower;
+    }
+
+    public void setMaxPower(double maxPower) {
+        this.maxPower = maxPower;
     }
 
     @Override
@@ -47,13 +60,12 @@ public class WindPowerPlant extends StorageIncapableAbstractPlant {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         WindPowerPlant that = (WindPowerPlant) o;
-        return Double.compare(that.maxPower, maxPower) == 0 &&
-                type == that.type;
+        return type == that.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), maxPower, type);
+        return Objects.hash(super.hashCode(), type);
     }
 
     @Override

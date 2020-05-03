@@ -5,6 +5,9 @@ import com.electricity.model.storage.Storage;
 public abstract class StorageCapableAbstractPlant extends PowerPlant {
     private Storage storage;
 
+    protected StorageCapableAbstractPlant() {
+    }
+
     protected StorageCapableAbstractPlant(Storage storage) {
         this.storage = storage;
     }

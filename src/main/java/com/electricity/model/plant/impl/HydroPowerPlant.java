@@ -9,15 +9,24 @@ import com.electricity.model.storage.Storage;
 import java.util.Objects;
 
 public class HydroPowerPlant extends StorageCapableAbstractPlant {
-    private final double maxPower;
     private final PowerPlantType type;
 
+    private double maxPower;
     private int resourceConsumption;
+
+    public HydroPowerPlant() {
+        this.type = PowerPlantType.HYDRO;
+        initPowerAndConsumption();
+    }
 
     public HydroPowerPlant(Storage storage) {
         super(storage);
-        this.maxPower = MaxPower.HYDRO.getPower();
         this.type = PowerPlantType.HYDRO;
+        initPowerAndConsumption();
+    }
+
+    private void initPowerAndConsumption() {
+        this.maxPower = MaxPower.HYDRO.getPower();
         this.resourceConsumption = ResourceConsumption.HYDRO.getConsumption();
     }
 
@@ -29,6 +38,10 @@ public class HydroPowerPlant extends StorageCapableAbstractPlant {
     @Override
     public double getMaxPower() {
         return maxPower;
+    }
+
+    public void setMaxPower(double maxPower) {
+        this.maxPower = maxPower;
     }
 
     @Override
@@ -47,13 +60,12 @@ public class HydroPowerPlant extends StorageCapableAbstractPlant {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         HydroPowerPlant that = (HydroPowerPlant) o;
-        return Double.compare(that.maxPower, maxPower) == 0 &&
-                type == that.type;
+        return type == that.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), maxPower, type);
+        return Objects.hash(super.hashCode(), type);
     }
 
     @Override

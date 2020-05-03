@@ -5,12 +5,14 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class User {
-
     private String id;
     private String firstName;
     private String lastName;
 
     private volatile BigDecimal currentAmountOfFunds;
+
+    public User() {
+    }
 
     public User(String firstName, String lastName) {
         this.id = UUID.randomUUID().toString();
@@ -56,14 +58,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id) &&
-                firstName.equals(user.firstName) &&
-                lastName.equals(user.lastName);
+        return Objects.equals(id, user.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName);
+        return Objects.hash(id);
     }
 
     @Override

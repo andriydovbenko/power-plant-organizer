@@ -9,15 +9,24 @@ import com.electricity.model.storage.Storage;
 import java.util.Objects;
 
 public class NuclearPowerPlan extends StorageCapableAbstractPlant {
-    private final double maxPower;
     private final PowerPlantType type;
 
+    private double maxPower;
     private int resourceConsumption;
+
+    public NuclearPowerPlan() {
+        this.type = PowerPlantType.NUCLEAR;
+        initPowerAndConsumption();
+    }
 
     public NuclearPowerPlan(Storage storage) {
         super(storage);
-        this.maxPower = MaxPower.NUCLEAR.getPower();
         this.type = PowerPlantType.NUCLEAR;
+        initPowerAndConsumption();
+    }
+
+    private void initPowerAndConsumption() {
+        this.maxPower = MaxPower.NUCLEAR.getPower();
         this.resourceConsumption = ResourceConsumption.NUCLEAR.getConsumption();
     }
 
@@ -29,6 +38,10 @@ public class NuclearPowerPlan extends StorageCapableAbstractPlant {
     @Override
     public double getMaxPower() {
         return maxPower;
+    }
+
+    public void setMaxPower(double maxPower) {
+        this.maxPower = maxPower;
     }
 
     @Override
@@ -46,14 +59,13 @@ public class NuclearPowerPlan extends StorageCapableAbstractPlant {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        NuclearPowerPlan powerPlan = (NuclearPowerPlan) o;
-        return Double.compare(powerPlan.maxPower, maxPower) == 0 &&
-                type == powerPlan.type;
+        NuclearPowerPlan that = (NuclearPowerPlan) o;
+        return type == that.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), maxPower, type);
+        return Objects.hash(super.hashCode(), type);
     }
 
     @Override

@@ -4,19 +4,28 @@ import com.electricity.enumeration.MaxPower;
 import com.electricity.enumeration.PowerPlantType;
 import com.electricity.enumeration.ResourceConsumption;
 import com.electricity.model.plant.StorageCapableAbstractPlant;
-import com.electricity.model.storage.Storage;
+import com.electricity.model.storage.impl.CoalStorage;
 
 import java.util.Objects;
 
 public class CoalFiredPowerPlant extends StorageCapableAbstractPlant {
     private final PowerPlantType type;
-    private final double maxPower;
 
+    private double maxPower;
     private int resourceConsumption;
 
-    public CoalFiredPowerPlant(Storage storage) {
-        super(storage);
+    public CoalFiredPowerPlant() {
         this.type = PowerPlantType.COAL;
+        initPowerAndConsumption();
+    }
+
+    public CoalFiredPowerPlant(CoalStorage coalStorage) {
+        super(coalStorage);
+        this.type = PowerPlantType.COAL;
+        initPowerAndConsumption();
+    }
+
+    private void initPowerAndConsumption() {
         this.maxPower = MaxPower.COAL.getPower();
         this.resourceConsumption = ResourceConsumption.COAL.getConsumption();
     }
@@ -27,6 +36,10 @@ public class CoalFiredPowerPlant extends StorageCapableAbstractPlant {
 
     public double getMaxPower() {
         return maxPower;
+    }
+
+    public void setMaxPower(double maxPower) {
+        this.maxPower = maxPower;
     }
 
     @Override
@@ -44,14 +57,13 @@ public class CoalFiredPowerPlant extends StorageCapableAbstractPlant {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        CoalFiredPowerPlant plant = (CoalFiredPowerPlant) o;
-        return Double.compare(plant.maxPower, maxPower) == 0 &&
-                type == plant.type;
+        CoalFiredPowerPlant that = (CoalFiredPowerPlant) o;
+        return type == that.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), type, maxPower);
+        return Objects.hash(super.hashCode(), type);
     }
 
     @Override

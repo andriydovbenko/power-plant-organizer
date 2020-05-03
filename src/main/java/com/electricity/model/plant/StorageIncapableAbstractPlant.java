@@ -5,6 +5,9 @@ import com.electricity.model.resource.UnstorableResource;
 public abstract class StorageIncapableAbstractPlant extends PowerPlant {
     private UnstorableResource resource;
 
+    protected StorageIncapableAbstractPlant() {
+    }
+
     protected StorageIncapableAbstractPlant(UnstorableResource resource) {
         this.resource = resource;
     }
