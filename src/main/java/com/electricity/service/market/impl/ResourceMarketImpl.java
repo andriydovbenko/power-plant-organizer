@@ -1,7 +1,6 @@
 package com.electricity.service.market.impl;
 
 import com.electricity.enumeration.PurchasableResourceType;
-import com.electricity.enumeration.ResourcePrice;
 import com.electricity.exeption.UnknownResourceTypeException;
 import com.electricity.model.resource.storable.Coal;
 import com.electricity.model.resource.storable.Uranium;
@@ -12,6 +11,9 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
+
+import static com.electricity.enumeration.ResourcePrice.COAL;
+import static com.electricity.enumeration.ResourcePrice.URANIUM;
 
 public class ResourceMarketImpl implements ResourceMarket {
 
@@ -32,7 +34,7 @@ public class ResourceMarketImpl implements ResourceMarket {
     }
 
     private ResourceTransaction setPriceForCoal(ResourceTransaction resourceTransaction) {
-        BigDecimal pricePerItem = ResourcePrice.COAL.getPrice();
+        BigDecimal pricePerItem = COAL.getPrice();
         int amount = resourceTransaction.getAmount();
 
         resourceTransaction.setTransactionPrice(
@@ -44,7 +46,7 @@ public class ResourceMarketImpl implements ResourceMarket {
     }
 
     private ResourceTransaction setPriceForUranium(ResourceTransaction resourceTransaction) {
-        BigDecimal pricePerItem = ResourcePrice.URANIUM.getPrice();
+        BigDecimal pricePerItem = URANIUM.getPrice();
         int amount = resourceTransaction.getAmount();
 
         resourceTransaction.setTransactionPrice(

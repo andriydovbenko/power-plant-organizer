@@ -6,7 +6,9 @@ import com.electricity.exeption.UnknownPowerPlantTypeException;
 import com.electricity.model.dto.impl.PowerPlantCreatingDto;
 import com.electricity.model.plant.PowerPlant;
 import com.electricity.model.plant.impl.*;
-import com.electricity.model.resource.storable.*;
+import com.electricity.model.resource.storable.Coal;
+import com.electricity.model.resource.storable.Uranium;
+import com.electricity.model.resource.storable.Water;
 import com.electricity.model.resource.unstorable.SolarEnergy;
 import com.electricity.model.resource.unstorable.Wind;
 import com.electricity.model.storage.impl.CoalStorage;
@@ -32,6 +34,9 @@ public class PowerPlantConstructorImpl implements PowerPlantConstructor {
 
     @Override
     public PowerPlant construct(PowerPlantCreatingDto powerPlantCreatingDto) {
+        if (powerPlantCreatingDto == null) {
+            throwUnknownPowerPlantExceptionCausedByNull();
+        }
 
         return constructionMethods.getOrDefault(powerPlantCreatingDto.getType(), this::throwUnknownPowerPlantException)
                 .construct(powerPlantCreatingDto);
@@ -104,5 +109,11 @@ public class PowerPlantConstructorImpl implements PowerPlantConstructor {
 
         throw new UnknownPowerPlantTypeException("Power plant Type: \"" + powerPlantCreatingDto.getType() +
                 "\" is not being supported by the application");
+    }
+
+    private void throwUnknownPowerPlantExceptionCausedByNull() {
+
+        throw new UnknownPowerPlantTypeException("powerPlantCreatingDto = null. " +
+                "Check the PowerPlantCreatingDto creation method");
     }
 }
