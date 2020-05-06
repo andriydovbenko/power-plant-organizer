@@ -5,6 +5,7 @@ import com.electricity.enumeration.PowerPlantType;
 import com.electricity.enumeration.ResourceConsumption;
 import com.electricity.model.plant.StorageIncapableAbstractPlant;
 import com.electricity.model.resource.UnstorableResource;
+import com.electricity.model.resource.unstorable.SolarEnergy;
 
 import java.util.Objects;
 
@@ -19,8 +20,8 @@ public class SolarPowerPlant extends StorageIncapableAbstractPlant {
         initPowerAndConsumption();
     }
 
-    public SolarPowerPlant(UnstorableResource resource) {
-        super(resource);
+    public SolarPowerPlant(SolarEnergy solarEnergy) {
+        super(solarEnergy);
         this.type = PowerPlantType.SOLAR;
         initPowerAndConsumption();
     }

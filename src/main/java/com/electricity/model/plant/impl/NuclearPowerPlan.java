@@ -5,6 +5,7 @@ import com.electricity.enumeration.PowerPlantType;
 import com.electricity.enumeration.ResourceConsumption;
 import com.electricity.model.plant.StorageCapableAbstractPlant;
 import com.electricity.model.storage.Storage;
+import com.electricity.model.storage.impl.UraniumStorage;
 
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ public class NuclearPowerPlan extends StorageCapableAbstractPlant {
         initPowerAndConsumption();
     }
 
-    public NuclearPowerPlan(Storage storage) {
+    public NuclearPowerPlan(UraniumStorage storage) {
         super(storage);
         this.type = PowerPlantType.NUCLEAR;
         initPowerAndConsumption();

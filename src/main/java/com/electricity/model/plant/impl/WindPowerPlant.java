@@ -4,7 +4,7 @@ import com.electricity.enumeration.MaxPower;
 import com.electricity.enumeration.PowerPlantType;
 import com.electricity.enumeration.ResourceConsumption;
 import com.electricity.model.plant.StorageIncapableAbstractPlant;
-import com.electricity.model.resource.UnstorableResource;
+import com.electricity.model.resource.unstorable.Wind;
 
 import java.util.Objects;
 
@@ -19,8 +19,8 @@ public class WindPowerPlant extends StorageIncapableAbstractPlant {
         initPowerAndConsumption();
     }
 
-    public WindPowerPlant(UnstorableResource resource) {
-        super(resource);
+    public WindPowerPlant(Wind wind) {
+        super(wind);
         this.type = PowerPlantType.WIND;
         initPowerAndConsumption();
     }
