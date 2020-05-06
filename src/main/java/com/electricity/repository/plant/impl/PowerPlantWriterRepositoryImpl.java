@@ -1,8 +1,6 @@
 package com.electricity.repository.plant.impl;
 
-import com.electricity.enumeration.PowerPlantColumnName;
 import com.electricity.enumeration.PowerPlantType;
-import com.electricity.enumeration.TableName;
 import com.electricity.exeption.UnknownPowerPlantTypeException;
 import com.electricity.model.plant.PowerPlant;
 import com.electricity.model.plant.StorageCapableAbstractPlant;
@@ -18,32 +16,35 @@ import java.sql.Statement;
 import java.util.EnumMap;
 import java.util.Map;
 
+import static com.electricity.enumeration.PowerPlantColumnName.*;
+import static com.electricity.enumeration.PowerPlantType.*;
+
 public class PowerPlantWriterRepositoryImpl implements PowerPlantWriterRepository {
     private static final Logger LOGGER = LogManager.getLogger(PowerPlantWriterRepositoryImpl.class);
     private static final String COMMA = ", ";
     private static final String QUOTE = "'";
     private static final String CLOSING_BRACKET = ")";
     private static final String OPENING_BRACKET = "(";
-    private static final String VALUES = " VALUES(";
-    private static final String INSERT_INTO = "INSERT INTO ";
     private final String firstPartOfQueryForAllTypes;
     private final String url;
     private final String username;
     private final String password;
     private final Map<PowerPlantType, PowerPlantWriterRepository> writingMethods;
+    private final String tableName;
     private StringBuilder sql;
 
-    public PowerPlantWriterRepositoryImpl(String url, String username, String password) {
+    public PowerPlantWriterRepositoryImpl(String url, String username, String password, String tableName) {
         this.url = url;
         this.username = username;
         this.password = password;
+        this.tableName = tableName;
         this.firstPartOfQueryForAllTypes = getBeginningOfQuery();
         this.writingMethods = new EnumMap<>(PowerPlantType.class);
-        writingMethods.put(PowerPlantType.COAL, this::insertStorageCapablePlants);
-        writingMethods.put(PowerPlantType.NUCLEAR, this::insertStorageCapablePlants);
-        writingMethods.put(PowerPlantType.HYDRO, this::insertStorageCapablePlants);
-        writingMethods.put(PowerPlantType.SOLAR, this::insertStorageIncapablePlants);
-        writingMethods.put(PowerPlantType.WIND, this::insertStorageIncapablePlants);
+        writingMethods.put(COAL, this::insertStorageCapablePlants);
+        writingMethods.put(NUCLEAR, this::insertStorageCapablePlants);
+        writingMethods.put(HYDRO, this::insertStorageCapablePlants);
+        writingMethods.put(SOLAR, this::insertStorageIncapablePlants);
+        writingMethods.put(WIND, this::insertStorageIncapablePlants);
     }
 
     private Connection getConnection() throws SQLException {
@@ -102,16 +103,16 @@ public class PowerPlantWriterRepositoryImpl implements PowerPlantWriterRepositor
 
 
     private String getBeginningOfQuery() {
-        return INSERT_INTO + TableName.POWER_PLANT.getName() +
-                OPENING_BRACKET + PowerPlantColumnName.ID.getName() + COMMA +
-                PowerPlantColumnName.TYPE.getName() + COMMA +
-                PowerPlantColumnName.COUNTRY.getName() + COMMA +
-                PowerPlantColumnName.NUMBER_OF_EMPLOYEE.getName() + COMMA +
-                PowerPlantColumnName.IS_WORKING.getName() + COMMA +
-                PowerPlantColumnName.MAX_POWER.getName() + COMMA +
-                PowerPlantColumnName.RESOURCE_CONSUMPTION.getName() + COMMA +
-                PowerPlantColumnName.RESOURCE_AMOUNT.getName() + CLOSING_BRACKET +
-                VALUES;
+        return "INSERT INTO " + tableName +
+                OPENING_BRACKET + ID.getName() + COMMA +
+                TYPE.getName() + COMMA +
+                COUNTRY.getName() + COMMA +
+                NUMBER_OF_EMPLOYEE.getName() + COMMA +
+                IS_WORKING.getName() + COMMA +
+                MAX_POWER.getName() + COMMA +
+                RESOURCE_CONSUMPTION.getName() + COMMA +
+                RESOURCE_AMOUNT.getName() + CLOSING_BRACKET +
+                " VALUES(";
     }
 
     private StringBuilder createPartOfQueryCommonToAllPowerPlants(PowerPlant powerPlant) {
@@ -125,7 +126,7 @@ public class PowerPlantWriterRepositoryImpl implements PowerPlantWriterRepositor
                 .append(QUOTE).append(powerPlant.getResourceConsumption()).append(QUOTE).append(COMMA);
     }
 
-    private PowerPlant throwUnknownPowerPlantException(PowerPlant powerPlant) {
+    private void throwUnknownPowerPlantException(PowerPlant powerPlant) {
         throw new UnknownPowerPlantTypeException("Power plant Type: \"" + powerPlant.getType() +
                 "\" is not being supported by the application");
     }

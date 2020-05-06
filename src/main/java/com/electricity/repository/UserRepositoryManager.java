@@ -1,8 +1,5 @@
 package com.electricity.repository;
 
-import com.electricity.enumeration.PowerPlantColumnName;
-import com.electricity.enumeration.TableName;
-import com.electricity.enumeration.UserColumnName;
 import com.electricity.model.user.User;
 import com.electricity.repository.jdbc.JdbcDataConnectionLoaderImpl;
 import com.electricity.repository.user.UserReaderRepository;
@@ -16,6 +13,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+
+import static com.electricity.enumeration.TableName.USER;
+import static com.electricity.enumeration.UserColumnName.*;
 
 public class UserRepositoryManager {
     private static final Logger LOGGER = LogManager.getLogger(UserRepositoryManager.class);
@@ -35,31 +36,40 @@ public class UserRepositoryManager {
         this.password = loader.getPassword();
         this.readerRepository = new UserReaderRepositoryImpl(url, username, password);
         this.writerRepository = new UserWriterRepositoryImpl(url, username, password);
-        this.droppingTableQuery = "DROP TABLE IF EXISTS " + TableName.USER.getName();
+        this.droppingTableQuery = "DROP TABLE IF EXISTS " + USER.getName();
         this.creatingTableQuery = getCreatingTableQuery();
     }
 
     private String getCreatingTableQuery() {
-        return "CREATE TABLE " + TableName.USER.getName() +
-                "(" + UserColumnName.ID.getName() + " varchar(36) not null, " +
-                UserColumnName.FIRST_NAME.getName() + " varchar(80), " +
-                UserColumnName.LAST_NAME.getName() + " varchar(80), " +
-                UserColumnName.CURRENT_FUNDS_AMOUNT.getName() + " DECIMAL, " +
-                "PRIMARY KEY ( " + PowerPlantColumnName.ID.getName() + " ))";
+        return "CREATE TABLE " + USER.getName() +
+                "(" + ID.getName() + " varchar(36) not null, " +
+                LOGIN.getName() + " varchar(100) not null, " +
+                PASSWORD.getName() + " varchar(100) not null, " +
+                FIRST_NAME.getName() + " varchar(80), " +
+                LAST_NAME.getName() + " varchar(80), " +
+                TABLE_NAME.getName() + " varchar(120), " +
+                CURRENT_FUNDS_AMOUNT.getName() + " DECIMAL, " +
+                "PRIMARY KEY ( " + ID.getName() + " ))";
     }
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
     }
 
-    public User getUser() {
-        return readerRepository.select();
+    public User getUserByLogin(String login) {
+        return readerRepository.selectByLogin(login);
+    }
+
+    public List<User> getAllUsers(){
+        return readerRepository.selectAll();
     }
 
     public void insertUser(User user) {
-        createTableAndDropIfExist();
-
         writerRepository.insert(user);
+    }
+
+    public void update(User user){
+        writerRepository.update(user);
     }
 
     public void createTableAndDropIfExist() {
