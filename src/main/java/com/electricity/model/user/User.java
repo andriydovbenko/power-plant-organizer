@@ -1,24 +1,30 @@
 package com.electricity.model.user;
 
+import com.electricity.enumeration.TableName;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
 public class User {
     private String id;
+    private String login;
+    private String password;
     private String firstName;
     private String lastName;
+    private String tableName;
 
-    private volatile BigDecimal currentAmountOfFunds;
+    private volatile BigDecimal currentFundsAmount;
 
     public User() {
     }
 
-    public User(String firstName, String lastName) {
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
         this.id = UUID.randomUUID().toString();
-        this.currentAmountOfFunds = BigDecimal.valueOf(200_000_000);
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.currentFundsAmount = BigDecimal.valueOf(200_000_000);
+        this.tableName = TableName.POWER_PLANT.getName() + "_" + login;
     }
 
     public String getId() {
@@ -45,12 +51,36 @@ public class User {
         this.lastName = lastName;
     }
 
-    public synchronized BigDecimal getCurrentAmountOfFunds() {
-        return currentAmountOfFunds;
+    public synchronized BigDecimal getCurrentFundsAmount() {
+        return currentFundsAmount;
     }
 
-    public synchronized void setCurrentAmountOfFunds(BigDecimal currentAmountOfFunds) {
-        this.currentAmountOfFunds = currentAmountOfFunds;
+    public synchronized void setCurrentFundsAmount(BigDecimal currentFundsAmount) {
+        this.currentFundsAmount = currentFundsAmount;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 
     @Override
@@ -58,21 +88,24 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id);
+        return Objects.equals(id, user.id) &&
+                Objects.equals(login, user.login);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, login);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
+                ", login='" + login + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", currentAmountOfFunds=" + currentAmountOfFunds +
+                ", tableName='" + tableName + '\'' +
+                ", currentFundsAmount=" + currentFundsAmount +
                 '}';
     }
 }
