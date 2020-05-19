@@ -21,9 +21,7 @@ class UraniumStorageTest {
         assertEquals(initialAmount, uraniumStorage.getResource().getAmount());
 
         Uranium additionalUranium = new Uranium(6000);
-        assertThrows(NotEnoughStorageSpaceException.class, () -> {
-            uraniumStorage.addResourceToContainer(additionalUranium);
-        });
+        assertThrows(NotEnoughStorageSpaceException.class, () -> uraniumStorage.addResourceToContainer(additionalUranium));
 
         int expectedAmountAtTheEnd = 10000;
         assertEquals(expectedAmountAtTheEnd, uraniumStorage.getResource().getAmount());

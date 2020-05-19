@@ -21,9 +21,7 @@ class CoalStorageTest {
         assertEquals(initialAmount, coalStorage.getResource().getAmount());
 
         Coal additionalCoal = new Coal(60000);
-        assertThrows(NotEnoughStorageSpaceException.class, () -> {
-            coalStorage.addResourceToContainer(additionalCoal);
-        });
+        assertThrows(NotEnoughStorageSpaceException.class, () -> coalStorage.addResourceToContainer(additionalCoal));
 
         int expectedAmountAtTheEnd = 100000;
         assertEquals(expectedAmountAtTheEnd, coalStorage.getResource().getAmount());

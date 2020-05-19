@@ -21,9 +21,7 @@ class WaterReservoirTest {
         assertEquals(initialAmount, waterReservoir.getResource().getAmount());
 
         Water additionalWater = new Water(50_000_000);
-        assertThrows(NotEnoughStorageSpaceException.class, () -> {
-            waterReservoir.addResourceToContainer(additionalWater);
-        });
+        assertThrows(NotEnoughStorageSpaceException.class, () -> waterReservoir.addResourceToContainer(additionalWater));
 
         int expectedAmountAtTheEnd = 100_000_000;
         assertEquals(expectedAmountAtTheEnd, waterReservoir.getResource().getAmount());
