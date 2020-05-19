@@ -4,7 +4,7 @@ import com.electricity.exeption.InsufficientFundsException;
 import com.electricity.model.dto.impl.PowerPlantCreatingDto;
 import com.electricity.model.transaction.ResourceTransaction;
 import com.electricity.model.user.User;
-import com.electricity.repository.UserRepositoryManager;
+import com.electricity.repository.UserRepository;
 import com.electricity.service.plant.PowerPlantPriceSettingService;
 import com.electricity.service.plant.impl.PowerPlantPriceSettingServiceImpl;
 import com.electricity.service.process.plant.PowerPlantProcessManager;
@@ -33,13 +33,12 @@ public class UserProcessManager {
     private final UserProcessThread userProcessThread;
     private PowerPlantProcessManager powerPlantProcessManager;
 
-    public UserProcessManager(UserRepositoryManager repositoryManager, User user) {
+    public UserProcessManager(UserRepository repositoryManager, User user) {
         this.userScheduledService = Executors.newScheduledThreadPool(POOL_SIZE);
         this.resourceMarket = new ResourceMarketImpl();
         this.priceSettingService = new PowerPlantPriceSettingServiceImpl();
         this.userProcessThread = new UserProcessThread(repositoryManager, user);
         userScheduledService.scheduleWithFixedDelay(userProcessThread, INITIAL_DELAY, REFRESH_TIME, TIME_UNIT);
-
     }
 
     public void injectPowerPlantExecutorReference(PowerPlantProcessManager powerPlantProcessManager) {

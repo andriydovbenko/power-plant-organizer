@@ -5,8 +5,8 @@ import com.electricity.model.dto.impl.PowerPlantCreatingDto;
 import com.electricity.model.dto.impl.PowerPlantUpdatingDto;
 import com.electricity.model.plant.PowerPlant;
 import com.electricity.model.transaction.ResourceTransaction;
-import com.electricity.repository.PowerPlantRepositoryManager;
-import com.electricity.repository.init.DataBaseInitializer;
+import com.electricity.repository.PowerPlantRepository;
+import com.electricity.repository.init.PowerPlantInitializer;
 import com.electricity.service.plant.PowerPlantConstructor;
 import com.electricity.service.plant.ResourceDeliveryService;
 import com.electricity.service.plant.impl.ResourceDeliveryServiceImpl;
@@ -33,7 +33,7 @@ public class PowerPlantProcessManager {
     private final PowerPlantProcessThread powerPlantProcessThread;
 
     public PowerPlantProcessManager(String tableName) {
-        this.powerPlantConstructor = DataBaseInitializer.POWER_PLANT_CONSTRUCTOR;
+        this.powerPlantConstructor = PowerPlantInitializer.POWER_PLANT_CONSTRUCTOR;
         this.powerPlantScheduledService = Executors.newScheduledThreadPool(POOL_SIZE);
         this.resourceDeliveryService = new ResourceDeliveryServiceImpl();
         this.powerPlantProcessThread = new PowerPlantProcessThread(tableName);
@@ -71,9 +71,9 @@ public class PowerPlantProcessManager {
     }
 
     public void setResourceUsingDeliveryService(ResourceTransaction resourceTransaction) {
+
         try {
             PowerPlant powerPlant = getPowerPlantById(resourceTransaction.getPowerPlantId());
-
             resourceDeliveryService.setResourceToPowerPlant(powerPlant, resourceTransaction);
         } catch (NoSuchPowerPlantIdException e) {
             LOGGER.error(e.toString());
@@ -93,7 +93,7 @@ public class PowerPlantProcessManager {
         powerPlantProcessThread.start();
     }
 
-    public PowerPlantRepositoryManager getRepositoryManager() {
+    public PowerPlantRepository getRepositoryManager() {
         return powerPlantProcessThread.getRepositoryManager();
     }
 

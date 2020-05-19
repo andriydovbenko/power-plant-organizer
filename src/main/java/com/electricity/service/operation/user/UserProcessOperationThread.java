@@ -2,7 +2,7 @@ package com.electricity.service.process.user;
 
 import com.electricity.exeption.InsufficientFundsException;
 import com.electricity.model.user.User;
-import com.electricity.repository.UserRepositoryManager;
+import com.electricity.repository.UserRepository;
 import com.electricity.service.process.plant.PowerPlantProcessThread;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,12 +13,12 @@ import static com.electricity.enumeration.EnergyCost.ENERGY;
 
 public class UserProcessThread implements Runnable {
     private static final Logger LOGGER = LogManager.getLogger(UserProcessThread.class);
-    private final UserRepositoryManager repositoryManager;
+    private final UserRepository repositoryManager;
     private final User user;
     private boolean isRunning;
     private BigDecimal pricePerMegawatt;
 
-    public UserProcessThread(UserRepositoryManager repositoryManager, User user) {
+    public UserProcessThread(UserRepository repositoryManager, User user) {
         this.repositoryManager = repositoryManager;
         this.user = user;
         this.isRunning = false;
@@ -35,8 +35,8 @@ public class UserProcessThread implements Runnable {
     private void updateUserFunds() {
         BigDecimal newFundsAmount = PowerPlantProcessThread.sellProducedEnergy(pricePerMegawatt)
                 .add(user.getCurrentFundsAmount());
-
-        LOGGER.debug("new amount of funds " + newFundsAmount);
+        System.err.println("running.. funds=" + newFundsAmount);
+//        LOGGER.debug("new amount of funds " + newFundsAmount);
 
         user.setCurrentFundsAmount(newFundsAmount);
     }

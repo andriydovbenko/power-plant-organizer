@@ -1,7 +1,7 @@
 package com.electricity.repository;
 
 import com.electricity.model.user.User;
-import com.electricity.repository.jdbc.JdbcDataConnectionLoaderImpl;
+import com.electricity.repository.jdbc.PostgresAuthenticationDataLoader;
 import com.electricity.repository.user.UserReaderRepository;
 import com.electricity.repository.user.UserWriterRepository;
 import com.electricity.repository.user.impl.UserReaderRepositoryImpl;
@@ -15,11 +15,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import static com.electricity.enumeration.Driver.POSTGRES;
 import static com.electricity.enumeration.TableName.USER;
 import static com.electricity.enumeration.UserColumnName.*;
 
-public class UserRepositoryManager {
-    private static final Logger LOGGER = LogManager.getLogger(UserRepositoryManager.class);
+public class UserManagerRepository {
+    private static final Logger LOGGER = LogManager.getLogger(UserManagerRepository.class);
     private final UserReaderRepository readerRepository;
     private final UserWriterRepository writerRepository;
     private final String droppingTableQuery;
@@ -29,18 +30,31 @@ public class UserRepositoryManager {
     private final String password;
     private StringBuilder messageInfo;
 
-    public UserRepositoryManager() {
-        JdbcDataConnectionLoaderImpl loader = JdbcDataConnectionLoaderImpl.getInstance();
+    public UserManagerRepository() {
+        PostgresAuthenticationDataLoader loader = PostgresAuthenticationDataLoader.getInstance();
         this.url = loader.getUrl();
         this.username = loader.getUsername();
         this.password = loader.getPassword();
         this.readerRepository = new UserReaderRepositoryImpl(url, username, password);
         this.writerRepository = new UserWriterRepositoryImpl(url, username, password);
         this.droppingTableQuery = "DROP TABLE IF EXISTS " + USER.getName();
-        this.creatingTableQuery = getCreatingTableQuery();
+        this.creatingTableQuery = getQueryToCreateTable();
+        setDriver();
     }
 
-    private String getCreatingTableQuery() {
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(url, username, password);
+    }
+
+    private void setDriver() {
+        try {
+            Class.forName(POSTGRES.getPath());
+        } catch (ClassNotFoundException e) {
+            LOGGER.error(e);
+        }
+    }
+
+    private String getQueryToCreateTable() {
         return "CREATE TABLE " + USER.getName() +
                 "(" + ID.getName() + " varchar(36) not null, " +
                 LOGIN.getName() + " varchar(100) not null, " +
@@ -52,15 +66,11 @@ public class UserRepositoryManager {
                 "PRIMARY KEY ( " + ID.getName() + " ))";
     }
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, username, password);
-    }
-
     public User getUserByLogin(String login) {
         return readerRepository.selectByLogin(login);
     }
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return readerRepository.selectAll();
     }
 
@@ -68,8 +78,12 @@ public class UserRepositoryManager {
         writerRepository.insert(user);
     }
 
-    public void update(User user){
+    public void update(User user) {
         writerRepository.update(user);
+    }
+
+    public boolean isLoginFree(String login) {
+        return readerRepository.selectByLogin(login) == null;
     }
 
     public void createTableAndDropIfExist() {

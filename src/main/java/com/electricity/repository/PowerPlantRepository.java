@@ -1,7 +1,7 @@
 package com.electricity.repository;
 
 import com.electricity.model.plant.PowerPlant;
-import com.electricity.repository.jdbc.JdbcDataConnectionLoaderImpl;
+import com.electricity.repository.jdbc.PostgresAuthenticationDataLoader;
 import com.electricity.repository.plant.PowerPlantReaderRepository;
 import com.electricity.repository.plant.PowerPlantWriterRepository;
 import com.electricity.repository.plant.impl.PowerPlantReaderRepositoryImpl;
@@ -15,10 +15,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import static com.electricity.enumeration.Driver.POSTGRES;
 import static com.electricity.enumeration.PowerPlantColumnName.*;
 
-public class PowerPlantRepositoryManager {
-    private static final Logger LOGGER = LogManager.getLogger(PowerPlantRepositoryManager.class);
+public class PowerPlantManagerRepository {
+    private static final Logger LOGGER = LogManager.getLogger(PowerPlantManagerRepository.class);
     private final PowerPlantWriterRepository powerPlantWriter;
     private final PowerPlantReaderRepository powerPlantReader;
     private final String droppingTableQuery;
@@ -29,20 +30,29 @@ public class PowerPlantRepositoryManager {
     private final String tableName;
     private StringBuilder messageInfo;
 
-    public PowerPlantRepositoryManager(String tableName) {
+    public PowerPlantManagerRepository(String tableName) {
         this.tableName = tableName;
-        JdbcDataConnectionLoaderImpl loader = JdbcDataConnectionLoaderImpl.getInstance();
+        PostgresAuthenticationDataLoader loader = PostgresAuthenticationDataLoader.getInstance();
         this.url = loader.getUrl();
         this.username = loader.getUsername();
         this.password = loader.getPassword();
         this.powerPlantWriter = new PowerPlantWriterRepositoryImpl(url, username, password, tableName);
         this.powerPlantReader = new PowerPlantReaderRepositoryImpl(url, username, password, tableName);
         this.droppingTableQuery = "DROP TABLE IF EXISTS " + tableName;
-        this.creatingTableQuery = getCreatingTableQuery();
+        this.creatingTableQuery = getQueryToCreateTable();
+        setDriver();
     }
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
+    }
+
+    private void setDriver() {
+        try {
+            Class.forName(POSTGRES.getPath());
+        } catch (ClassNotFoundException e) {
+            LOGGER.error(e);
+        }
     }
 
     public List<PowerPlant> getAllPowerPlants() {
@@ -67,18 +77,11 @@ public class PowerPlantRepositoryManager {
         }
     }
 
-    public void insertAllPowerPlants(List<PowerPlant> powerPlants) {
-        createTableAndDropIfExist();
-
-        powerPlants.forEach(powerPlantWriter::insertToDb);
-    }
-
     private void dropTableIfExist() {
         messageInfo = new StringBuilder();
 
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement()) {
-
             statement.executeUpdate(droppingTableQuery);
 
             messageInfo.append(" Power plant table was dropped. Query= ").append(droppingTableQuery);
@@ -91,7 +94,13 @@ public class PowerPlantRepositoryManager {
         }
     }
 
-    private String getCreatingTableQuery() {
+    public void insertAllPowerPlants(List<PowerPlant> powerPlants) {
+        createTableAndDropIfExist();
+
+        powerPlants.forEach(powerPlantWriter::insertToDb);
+    }
+
+    private String getQueryToCreateTable() {
         return "CREATE TABLE " + tableName +
                 " (" + ID.getName() + " varchar(36) not null, " +
                 TYPE.getName() + " text not null, " +

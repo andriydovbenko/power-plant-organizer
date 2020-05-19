@@ -1,7 +1,7 @@
 package com.electricity.service.process.plant;
 
 import com.electricity.model.plant.PowerPlant;
-import com.electricity.repository.PowerPlantRepositoryManager;
+import com.electricity.repository.PowerPlantRepository;
 import com.electricity.service.plant.impl.EnergyProducingServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,16 +11,14 @@ import java.util.*;
 
 public class PowerPlantProcessThread implements Runnable {
     private static final Logger LOGGER = LogManager.getLogger(PowerPlantProcessThread.class);
-
     private static volatile double totalProducedEnergy;
-
     private final EnergyProducingServiceImpl producingService;
-    private final PowerPlantRepositoryManager repositoryManager;
+    private final PowerPlantRepository repositoryManager;
     private List<PowerPlant> powerPlants;
     private boolean isRunning;
 
     public PowerPlantProcessThread(String tableName) {
-        this.repositoryManager = new PowerPlantRepositoryManager(tableName);
+        this.repositoryManager = new PowerPlantRepository(tableName);
         this.producingService = new EnergyProducingServiceImpl();
     }
 
@@ -88,7 +86,7 @@ public class PowerPlantProcessThread implements Runnable {
                 .filter(powerPlant -> id.equals(powerPlant.getId())).findAny();
     }
 
-    public PowerPlantRepositoryManager getRepositoryManager() {
+    public PowerPlantRepository getRepositoryManager() {
         return repositoryManager;
     }
 }
