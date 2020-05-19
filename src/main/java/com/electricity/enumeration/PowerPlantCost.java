@@ -3,7 +3,6 @@ package com.electricity.enumeration;
 import java.math.BigDecimal;
 
 public enum PowerPlantCost {
-
     //cost of construction power plant in usd
     COAL(BigDecimal.valueOf(25_000_000)),
     HYDRO(BigDecimal.valueOf(30_000_000)),

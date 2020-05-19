@@ -1,8 +1,8 @@
 package com.electricity.enumeration;
 
 public enum InitialWorkTimeForUnstorablePowerPlant {
-    SOLAR(120),
-    WIND(100);
+    SOLAR(1200),
+    WIND(1000);
 
     private final int workTimeLeft;
 
