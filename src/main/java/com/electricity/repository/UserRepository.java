@@ -13,7 +13,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
 
 import static com.electricity.enumeration.Driver.POSTGRES;
 import static com.electricity.enumeration.TableName.USER;
@@ -68,10 +67,6 @@ public class UserRepository {
 
     public User getUserByLogin(String login) {
         return readerRepository.selectByLogin(login);
-    }
-
-    public List<User> getAllUsers() {
-        return readerRepository.selectAll();
     }
 
     public void insertUser(User user) {

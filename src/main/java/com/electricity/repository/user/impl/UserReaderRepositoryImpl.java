@@ -7,8 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.electricity.enumeration.Driver.POSTGRES;
 import static com.electricity.enumeration.TableName.USER;
@@ -61,29 +59,8 @@ public class UserReaderRepositoryImpl implements UserReaderRepository {
             messageInfo.append(" Failed Query =").append(query);
             LOGGER.debug(messageInfo);
         }
+
         return user;
-    }
-
-    @Override
-    public List<User> selectAll() {
-        List<User> users = new ArrayList<>();
-
-        try (Connection connection = getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sql)) {
-
-            while (resultSet.next()) {
-                users.add(getUserFromTable(resultSet));
-
-                LOGGER.debug("User was successfully download from db");
-            }
-        } catch (SQLException | UnknownPowerPlantTypeException e) {
-            StringBuilder messageInfo = new StringBuilder(e.getMessage());
-            LOGGER.error(messageInfo);
-            messageInfo.append(" Failed Query =").append(sql);
-            LOGGER.debug(messageInfo);
-        }
-        return users;
     }
 
     private User getUserFromTable(ResultSet resultSet) throws SQLException {
