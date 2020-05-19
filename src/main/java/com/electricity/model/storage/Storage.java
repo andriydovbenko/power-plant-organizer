@@ -5,7 +5,7 @@ import com.electricity.model.resource.StorableResource;
 
 public abstract class Storage {
     private StorableResource resource;
-    private int capacity;
+    private final int capacity;
 
     public Storage(int capacity) {
         this.capacity = capacity;
@@ -41,10 +41,6 @@ public abstract class Storage {
 
     public int getCapacity() {
         return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
     }
 
     @Override

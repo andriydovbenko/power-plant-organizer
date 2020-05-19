@@ -5,10 +5,6 @@ import com.electricity.model.resource.StorableResource;
 public class Uranium implements StorableResource {
     private int amount;
 
-    public Uranium() {
-        this.amount = 0;
-    }
-
     public Uranium(int amount) {
         this.amount = amount;
     }

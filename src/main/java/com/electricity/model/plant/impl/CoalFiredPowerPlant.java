@@ -14,11 +14,6 @@ public class CoalFiredPowerPlant extends StorageCapableAbstractPlant {
     private double maxPower;
     private int resourceConsumption;
 
-    public CoalFiredPowerPlant() {
-        this.type = PowerPlantType.COAL;
-        initPowerAndConsumption();
-    }
-
     public CoalFiredPowerPlant(CoalStorage coalStorage) {
         super(coalStorage);
         this.type = PowerPlantType.COAL;

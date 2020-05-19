@@ -14,11 +14,6 @@ public class WindPowerPlant extends StorageIncapableAbstractPlant {
     private double maxPower;
     private int resourceConsumption;
 
-    public WindPowerPlant() {
-        this.type = PowerPlantType.WIND;
-        initPowerAndConsumption();
-    }
-
     public WindPowerPlant(Wind wind) {
         super(wind);
         this.type = PowerPlantType.WIND;

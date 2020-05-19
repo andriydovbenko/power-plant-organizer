@@ -5,10 +5,6 @@ import com.electricity.model.resource.StorableResource;
 public class Water implements StorableResource {
     private int amount;
 
-    public Water() {
-        this.amount = 0;
-    }
-
     public Water(int amount) {
         this.amount = amount;
     }

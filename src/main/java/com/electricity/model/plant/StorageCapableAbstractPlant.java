@@ -5,9 +5,6 @@ import com.electricity.model.storage.Storage;
 public abstract class StorageCapableAbstractPlant extends PowerPlant {
     private Storage storage;
 
-    protected StorageCapableAbstractPlant() {
-    }
-
     protected StorageCapableAbstractPlant(Storage storage) {
         this.storage = storage;
     }
@@ -21,11 +18,6 @@ public abstract class StorageCapableAbstractPlant extends PowerPlant {
     }
 
     @Override
-    public int getResourceAmount() {
-        return storage.getAmountOfResource();
-    }
-
-    @Override
     public boolean equals(Object o) {
         return super.equals(o);
     }
@@ -33,6 +25,11 @@ public abstract class StorageCapableAbstractPlant extends PowerPlant {
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+    @Override
+    public int getResourceAmount() {
+        return storage.getAmountOfResource();
     }
 
     @Override

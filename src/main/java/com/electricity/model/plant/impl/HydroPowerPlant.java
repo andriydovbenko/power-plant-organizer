@@ -14,11 +14,6 @@ public class HydroPowerPlant extends StorageCapableAbstractPlant {
     private double maxPower;
     private int resourceConsumption;
 
-    public HydroPowerPlant() {
-        this.type = PowerPlantType.HYDRO;
-        initPowerAndConsumption();
-    }
-
     public HydroPowerPlant(WaterReservoir reservoir) {
         super(reservoir);
         this.type = PowerPlantType.HYDRO;

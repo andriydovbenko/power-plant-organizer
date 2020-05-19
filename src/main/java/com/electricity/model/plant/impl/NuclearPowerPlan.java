@@ -4,7 +4,6 @@ import com.electricity.enumeration.MaxPower;
 import com.electricity.enumeration.PowerPlantType;
 import com.electricity.enumeration.ResourceConsumption;
 import com.electricity.model.plant.StorageCapableAbstractPlant;
-import com.electricity.model.storage.Storage;
 import com.electricity.model.storage.impl.UraniumStorage;
 
 import java.util.Objects;
@@ -14,11 +13,6 @@ public class NuclearPowerPlan extends StorageCapableAbstractPlant {
 
     private double maxPower;
     private int resourceConsumption;
-
-    public NuclearPowerPlan() {
-        this.type = PowerPlantType.NUCLEAR;
-        initPowerAndConsumption();
-    }
 
     public NuclearPowerPlan(UraniumStorage storage) {
         super(storage);
