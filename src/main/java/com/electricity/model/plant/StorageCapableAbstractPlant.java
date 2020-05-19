@@ -21,6 +21,11 @@ public abstract class StorageCapableAbstractPlant extends PowerPlant {
     }
 
     @Override
+    public int getResourceAmount() {
+        return storage.getAmountOfResource();
+    }
+
+    @Override
     public boolean equals(Object o) {
         return super.equals(o);
     }

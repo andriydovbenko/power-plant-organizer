@@ -21,6 +21,11 @@ public abstract class StorageIncapableAbstractPlant extends PowerPlant {
     }
 
     @Override
+    public int getResourceAmount() {
+        return resource.getWorkTimeLeft();
+    }
+
+    @Override
     public boolean equals(Object o) {
         return super.equals(o);
     }

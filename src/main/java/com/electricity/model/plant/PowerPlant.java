@@ -23,6 +23,8 @@ public abstract class PowerPlant {
 
     public abstract void setResourceConsumption(int resourceConsumption);
 
+    public abstract int getResourceAmount();
+
     public String getId() {
         return id;
     }
