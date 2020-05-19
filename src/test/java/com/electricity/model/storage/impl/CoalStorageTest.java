@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CoalStorageTest {
-    private final int initialAmount = 5000;
+    private final int initialAmount = 50000;
     private final CoalStorage coalStorage;
 
     CoalStorageTest() {
@@ -20,18 +20,18 @@ class CoalStorageTest {
     void addResourceToContainer() {
         assertEquals(initialAmount, coalStorage.getResource().getAmount());
 
-        Coal additionalCoal = new Coal(6000);
+        Coal additionalCoal = new Coal(60000);
         assertThrows(NotEnoughStorageSpaceException.class, () -> {
             coalStorage.addResourceToContainer(additionalCoal);
         });
 
-        int expectedAmountAtTheEnd = 10000;
+        int expectedAmountAtTheEnd = 100000;
         assertEquals(expectedAmountAtTheEnd, coalStorage.getResource().getAmount());
     }
 
     @Test
     void getCapacity() {
-        int expectedCapacity = 10000;
+        int expectedCapacity = 100000;
         assertEquals(expectedCapacity, coalStorage.getCapacity());
     }
 }

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UraniumStorageTest {
-    private final int initialAmount = 500;
+    private final int initialAmount = 5000;
     private final UraniumStorage uraniumStorage;
 
     UraniumStorageTest() {
@@ -20,18 +20,18 @@ class UraniumStorageTest {
     void addResourceToContainer() {
         assertEquals(initialAmount, uraniumStorage.getResource().getAmount());
 
-        Uranium additionalUranium = new Uranium(600);
+        Uranium additionalUranium = new Uranium(6000);
         assertThrows(NotEnoughStorageSpaceException.class, () -> {
             uraniumStorage.addResourceToContainer(additionalUranium);
         });
 
-        int expectedAmountAtTheEnd = 1000;
+        int expectedAmountAtTheEnd = 10000;
         assertEquals(expectedAmountAtTheEnd, uraniumStorage.getResource().getAmount());
     }
 
     @Test
     void getCapacity() {
-        int expectedCapacity = 1000;
+        int expectedCapacity = 10000;
         assertEquals(expectedCapacity, uraniumStorage.getCapacity());
     }
 }

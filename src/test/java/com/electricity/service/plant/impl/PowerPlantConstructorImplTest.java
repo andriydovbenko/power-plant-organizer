@@ -36,10 +36,13 @@ class PowerPlantConstructorImplTest {
         dto.setType(null);
 
         assertThrows(UnknownPowerPlantTypeException.class, () -> constructor.construct(dto));
+        assertThrows(UnknownPowerPlantTypeException.class, () -> constructor.construct(null));
+
     }
 
     @TestFactory
     Stream<DynamicTest> construct() {
+        //Given
         List<PowerPlantType> plantTypes = new ArrayList<>(List.of(
                 PowerPlantType.COAL, PowerPlantType.NUCLEAR, PowerPlantType.HYDRO,
                 PowerPlantType.SOLAR, PowerPlantType.WIND
@@ -54,8 +57,10 @@ class PowerPlantConstructorImplTest {
                     int index = plantTypes.indexOf(type);
                     dto.setType(type);
 
+                    //When
                     PowerPlant powerPlant = constructor.construct(dto);
 
+                    //Then
                     assertEquals(type, powerPlant.getType());
                     assertEquals(country, powerPlant.getCountry());
                     assertEquals(numberOfEmployee, powerPlant.getNumberOfEmployees());

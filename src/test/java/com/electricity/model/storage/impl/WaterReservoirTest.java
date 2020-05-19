@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WaterReservoirTest {
-    private final int initialAmount = 6_000_000;
+    private final int initialAmount = 60_000_000;
     private final WaterReservoir waterReservoir;
 
     WaterReservoirTest() {
@@ -20,18 +20,18 @@ class WaterReservoirTest {
     void addResourceToContainer() {
         assertEquals(initialAmount, waterReservoir.getResource().getAmount());
 
-        Water additionalWater = new Water(5_000_000);
+        Water additionalWater = new Water(50_000_000);
         assertThrows(NotEnoughStorageSpaceException.class, () -> {
             waterReservoir.addResourceToContainer(additionalWater);
         });
 
-        int expectedAmountAtTheEnd = 10_000_000;
+        int expectedAmountAtTheEnd = 100_000_000;
         assertEquals(expectedAmountAtTheEnd, waterReservoir.getResource().getAmount());
     }
 
     @Test
     void getCapacity() {
-        int expectedCapacity = 10_000_000;
+        int expectedCapacity = 100_000_000;
         assertEquals(expectedCapacity, waterReservoir.getCapacity());
     }
 }

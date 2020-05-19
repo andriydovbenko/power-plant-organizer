@@ -42,7 +42,7 @@ class ResourceDeliveryServiceImplTest {
     @TestFactory
     Collection<DynamicTest> setResourceToCoalPowerPlant() {
         int storageCapacity = CoalStorage.CAPACITY;
-        int[] resourceAmountRange = {0, 1000, 3000, 5000, 8000};
+        int[] resourceAmountRange = {0, 10000, 30000, 50000, 80000};
         int expectedAmountAfterOperation = initialAmountOfResource;
 
         CoalFiredPowerPlant powerPlant = initCoalFiredPowerPlant();
@@ -89,7 +89,7 @@ class ResourceDeliveryServiceImplTest {
     @TestFactory
     Collection<DynamicTest> setResourceToNuclearPowerPlant() {
         int storageCapacity = UraniumStorage.CAPACITY;
-        int[] resourceAmountRange = {0, 100, 300, 500, 800};
+        int[] resourceAmountRange = {0, 1000, 3000, 5000, 8000};
         int expectedAmountAfterOperation = initialAmountOfResource;
 
         PowerPlant powerPlant = initNuclearPowerPlant();
