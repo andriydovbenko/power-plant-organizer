@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import static com.electricity.enumeration.Driver.POSTGRES;
 import static com.electricity.enumeration.TableName.*;
 import static com.electricity.enumeration.UserColumnName.*;
 
@@ -29,10 +31,19 @@ public class UserWriterRepositoryImpl implements UserWriterRepository {
         this.username = username;
         this.password = password;
         this.firstPartOfInsertQuery = getFirsPartOfInsertQuery();
+        setDriver();
     }
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
+    }
+
+    private void setDriver() {
+        try {
+            Class.forName(POSTGRES.getPath());
+        } catch (ClassNotFoundException e) {
+            LOGGER.error(e);
+        }
     }
 
     @Override

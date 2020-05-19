@@ -10,15 +10,15 @@ import java.util.List;
 
 import static com.electricity.enumeration.PowerPlantType.*;
 
-public class DataBaseInitializer {
+public class PowerPlantInitializer {
 
-    private DataBaseInitializer() {
+    private PowerPlantInitializer() {
     }
 
     public static final PowerPlantConstructor POWER_PLANT_CONSTRUCTOR =
             new PowerPlantConstructorImpl();
 
-    public static List<PowerPlant> initialize() {
+    public static List<PowerPlant> getInitialPowerPlants() {
         PowerPlantCreatingDto dto1 = new PowerPlantCreatingDto();
             dto1.setType(COAL);
             dto1.setCountry("USA");

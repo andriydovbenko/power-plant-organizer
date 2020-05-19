@@ -19,8 +19,8 @@ import static com.electricity.enumeration.Driver.POSTGRES;
 import static com.electricity.enumeration.TableName.USER;
 import static com.electricity.enumeration.UserColumnName.*;
 
-public class UserManagerRepository {
-    private static final Logger LOGGER = LogManager.getLogger(UserManagerRepository.class);
+public class UserRepository {
+    private static final Logger LOGGER = LogManager.getLogger(UserRepository.class);
     private final UserReaderRepository readerRepository;
     private final UserWriterRepository writerRepository;
     private final String droppingTableQuery;
@@ -30,7 +30,7 @@ public class UserManagerRepository {
     private final String password;
     private StringBuilder messageInfo;
 
-    public UserManagerRepository() {
+    public UserRepository() {
         PostgresAuthenticationDataLoader loader = PostgresAuthenticationDataLoader.getInstance();
         this.url = loader.getUrl();
         this.username = loader.getUsername();

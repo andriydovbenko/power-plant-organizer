@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.*;
 
+import static com.electricity.enumeration.Driver.POSTGRES;
 import static com.electricity.enumeration.PowerPlantColumnName.*;
 import static com.electricity.enumeration.PowerPlantCost.*;
 import static com.electricity.enumeration.UserColumnName.ID;
@@ -38,6 +39,7 @@ public class PowerPlantReaderRepositoryImpl implements PowerPlantReaderRepositor
         this.password = password;
         this.powerPlants = Collections.synchronizedList(new ArrayList<>());
         this.selectionQuery = "SELECT * FROM " + tableName;
+        setDriver();
 
         this.switchingMethod = new HashMap<>();
         switchingMethod.put(COAL.toString(), this::switchToCoalFiredPowerPlant);
@@ -45,10 +47,19 @@ public class PowerPlantReaderRepositoryImpl implements PowerPlantReaderRepositor
         switchingMethod.put(HYDRO.toString(), this::switchToHydroPowerPlant);
         switchingMethod.put(WIND.toString(), this::switchToWindPowerPlant);
         switchingMethod.put(SOLAR.toString(), this::switchToSolarPowerPlant);
+
     }
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
+    }
+
+    private void setDriver() {
+        try {
+            Class.forName(POSTGRES.getPath());
+        } catch (ClassNotFoundException e) {
+            LOGGER.error(e);
+        }
     }
 
     @Override
@@ -72,6 +83,7 @@ public class PowerPlantReaderRepositoryImpl implements PowerPlantReaderRepositor
                 messageInfo.append(" Power plant= ").append(plant.toString())
                         .append(" successfully selected from database");
                 LOGGER.debug(messageInfo);
+                messageInfo.setLength(0);
             }
         } catch (SQLException | UnknownPowerPlantTypeException e) {
             messageInfo.append(e.getMessage());

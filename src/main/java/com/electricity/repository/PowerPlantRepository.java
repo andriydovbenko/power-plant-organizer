@@ -18,8 +18,8 @@ import java.util.List;
 import static com.electricity.enumeration.Driver.POSTGRES;
 import static com.electricity.enumeration.PowerPlantColumnName.*;
 
-public class PowerPlantManagerRepository {
-    private static final Logger LOGGER = LogManager.getLogger(PowerPlantManagerRepository.class);
+public class PowerPlantRepository {
+    private static final Logger LOGGER = LogManager.getLogger(PowerPlantRepository.class);
     private final PowerPlantWriterRepository powerPlantWriter;
     private final PowerPlantReaderRepository powerPlantReader;
     private final String droppingTableQuery;
@@ -30,7 +30,7 @@ public class PowerPlantManagerRepository {
     private final String tableName;
     private StringBuilder messageInfo;
 
-    public PowerPlantManagerRepository(String tableName) {
+    public PowerPlantRepository(String tableName) {
         this.tableName = tableName;
         PostgresAuthenticationDataLoader loader = PostgresAuthenticationDataLoader.getInstance();
         this.url = loader.getUrl();
@@ -94,7 +94,7 @@ public class PowerPlantManagerRepository {
         }
     }
 
-    public void insertAllPowerPlants(List<PowerPlant> powerPlants) {
+    public void insertAllPlantsInNewTable(List<PowerPlant> powerPlants) {
         createTableAndDropIfExist();
 
         powerPlants.forEach(powerPlantWriter::insertToDb);

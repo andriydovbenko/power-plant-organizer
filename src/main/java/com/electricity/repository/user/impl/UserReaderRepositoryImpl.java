@@ -10,6 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.electricity.enumeration.Driver.POSTGRES;
 import static com.electricity.enumeration.TableName.USER;
 import static com.electricity.enumeration.UserColumnName.*;
 
@@ -25,10 +26,19 @@ public class UserReaderRepositoryImpl implements UserReaderRepository {
         this.username = username;
         this.password = password;
         this.sql = "SELECT * FROM " + USER.getName();
+        setDriver();
     }
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
+    }
+
+    private void setDriver() {
+        try {
+            Class.forName(POSTGRES.getPath());
+        } catch (ClassNotFoundException e) {
+            LOGGER.error(e);
+        }
     }
 
     @Override
@@ -36,10 +46,10 @@ public class UserReaderRepositoryImpl implements UserReaderRepository {
         User user = null;
         String query = sql + " WHERE " + LOGIN.getName() +
                 "='" + login + "';";
+
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
-
             while (resultSet.next()) {
                 user = getUserFromTable(resultSet);
 
@@ -48,7 +58,7 @@ public class UserReaderRepositoryImpl implements UserReaderRepository {
         } catch (SQLException | UnknownPowerPlantTypeException e) {
             StringBuilder messageInfo = new StringBuilder(e.getMessage());
             LOGGER.error(messageInfo);
-            messageInfo.append(" Failed Query =").append(sql);
+            messageInfo.append(" Failed Query =").append(query);
             LOGGER.debug(messageInfo);
         }
         return user;

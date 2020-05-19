@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.EnumMap;
 import java.util.Map;
 
+import static com.electricity.enumeration.Driver.POSTGRES;
 import static com.electricity.enumeration.PowerPlantColumnName.*;
 import static com.electricity.enumeration.PowerPlantType.*;
 
@@ -45,10 +46,19 @@ public class PowerPlantWriterRepositoryImpl implements PowerPlantWriterRepositor
         writingMethods.put(HYDRO, this::insertStorageCapablePlants);
         writingMethods.put(SOLAR, this::insertStorageIncapablePlants);
         writingMethods.put(WIND, this::insertStorageIncapablePlants);
+        setDriver();
     }
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, username, password);
+    }
+
+    private void setDriver() {
+        try {
+            Class.forName(POSTGRES.getPath());
+        } catch (ClassNotFoundException e) {
+            LOGGER.error(e);
+        }
     }
 
     @Override
