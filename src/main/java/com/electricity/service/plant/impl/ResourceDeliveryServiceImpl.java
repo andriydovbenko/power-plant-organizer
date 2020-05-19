@@ -17,7 +17,6 @@ import java.util.Map;
 
 public class ResourceDeliveryServiceImpl implements ResourceDeliveryService {
     private static final Logger LOGGER = LogManager.getLogger(ResourceDeliveryServiceImpl.class);
-
     private final Map<PowerPlantType, ResourceDeliveryService> deliveryMethods;
 
     public ResourceDeliveryServiceImpl() {
@@ -55,11 +54,10 @@ public class ResourceDeliveryServiceImpl implements ResourceDeliveryService {
 
     private void makeLog(NotEnoughStorageSpaceException e) {
         LOGGER.error(e);
-        LOGGER.info(e.getStackTrace());
+        LOGGER.error(e.getStackTrace());
     }
 
     private void throwUnknownResourceTypeException(PowerPlant powerPlant, ResourceTransaction resourceTransaction) {
-
         throw new UnknownResourceTypeException("Type of Power Plant \"" + powerPlant.getType() +
                 "\" does not support resource transportation");
     }

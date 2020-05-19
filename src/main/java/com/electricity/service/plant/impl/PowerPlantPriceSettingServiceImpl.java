@@ -1,6 +1,5 @@
 package com.electricity.service.plant.impl;
 
-import com.electricity.enumeration.PowerPlantCost;
 import com.electricity.enumeration.PowerPlantType;
 import com.electricity.exeption.UnknownPowerPlantTypeException;
 import com.electricity.service.plant.PowerPlantPriceSettingService;
@@ -10,8 +9,9 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class PowerPlantPriceSettingServiceImpl implements PowerPlantPriceSettingService {
+import static com.electricity.enumeration.PowerPlantCost.*;
 
+public class PowerPlantPriceSettingServiceImpl implements PowerPlantPriceSettingService {
     private final Map<PowerPlantType, PowerPlantPriceSettingService> priceGettingMethods;
 
     public PowerPlantPriceSettingServiceImpl() {
@@ -25,38 +25,31 @@ public class PowerPlantPriceSettingServiceImpl implements PowerPlantPriceSetting
 
     @Override
     public BigDecimal getPowerPlantCost(PowerPlantType powerPlantType) {
-
         return priceGettingMethods.getOrDefault(powerPlantType, this::throwUnknownPowerPlantTypeException)
                 .getPowerPlantCost(powerPlantType);
     }
 
     private BigDecimal getCoalFiredPowerPlantPrice(PowerPlantType powerPlantType) {
-
-        return PowerPlantCost.COAL.getCost();
+        return COAL.getCost();
     }
 
     private BigDecimal getNuclearPowerPlantPrice(PowerPlantType powerPlantType) {
-
-        return PowerPlantCost.NUCLEAR.getCost();
+        return NUCLEAR.getCost();
     }
 
     private BigDecimal getHydroPowerPlantPrice(PowerPlantType powerPlantType) {
-
-        return PowerPlantCost.HYDRO.getCost();
+        return HYDRO.getCost();
     }
 
     private BigDecimal getSolarPowerPlantPrice(PowerPlantType powerPlantType) {
-
-        return PowerPlantCost.SOLAR.getCost();
+        return SOLAR.getCost();
     }
 
     private BigDecimal getWindPowerPlantPrice(PowerPlantType powerPlantType) {
-
-        return PowerPlantCost.WIND.getCost();
+        return WIND.getCost();
     }
 
     private BigDecimal throwUnknownPowerPlantTypeException(PowerPlantType powerPlantType) {
-
         throw new UnknownPowerPlantTypeException("Power plant Type: \"" + powerPlantType +
                 "\" is not being supported by the application");
     }

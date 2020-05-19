@@ -1,4 +1,4 @@
-package com.electricity.service.process.plant;
+package com.electricity.service.operation.plant;
 
 import com.electricity.model.plant.PowerPlant;
 import com.electricity.repository.PowerPlantRepository;
@@ -9,17 +9,18 @@ import org.apache.logging.log4j.Logger;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class PowerPlantProcessThread implements Runnable {
-    private static final Logger LOGGER = LogManager.getLogger(PowerPlantProcessThread.class);
+public class PowerPlantOperationThread implements Runnable {
+    private static final Logger LOGGER = LogManager.getLogger(PowerPlantOperationThread.class);
     private static volatile double totalProducedEnergy;
     private final EnergyProducingServiceImpl producingService;
     private final PowerPlantRepository repositoryManager;
     private List<PowerPlant> powerPlants;
     private boolean isRunning;
 
-    public PowerPlantProcessThread(String tableName) {
+    public PowerPlantOperationThread(String tableName) {
         this.repositoryManager = new PowerPlantRepository(tableName);
         this.producingService = new EnergyProducingServiceImpl();
+        downloadPowerPlantsFromTable();
     }
 
     @Override
@@ -31,12 +32,17 @@ public class PowerPlantProcessThread implements Runnable {
                     .map(producingService::produceEnergy)
                     .reduce(0.d, Double::sum);
 
-            synchronized (PowerPlantProcessThread.class) {
+            synchronized (PowerPlantOperationThread.class) {
                 totalProducedEnergy += producedEnergy;
+                LOGGER.debug("The Power Plants thread is running");
             }
         } else {
-            LOGGER.debug(" service isn't running");
+            LOGGER.debug("The Power Plants thread isn't running");
         }
+    }
+
+    private void downloadPowerPlantsFromTable() {
+        this.powerPlants = repositoryManager.getAllPowerPlants();
     }
 
     public void addPowerPlant(PowerPlant powerPlant) {
@@ -60,33 +66,19 @@ public class PowerPlantProcessThread implements Runnable {
     }
 
     private void save() {
-        LOGGER.debug(" Saving Power Plant into DB");
-        repositoryManager.insertAllPowerPlants(powerPlants);
+        repositoryManager.insertAllPlantsInNewTable(powerPlants);
     }
 
     public void start() {
-        powerPlants = repositoryManager.getAllPowerPlants();
         this.isRunning = true;
-    }
-
-    public boolean isRunning() {
-        return isRunning;
     }
 
     public List<PowerPlant> getPowerPlants() {
         return powerPlants;
     }
 
-    public void setPowerPlants(List<PowerPlant> powerPlants) {
-        this.powerPlants = powerPlants;
-    }
-
     public Optional<PowerPlant> getOptPowerPlantById(String id) {
         return powerPlants.stream()
                 .filter(powerPlant -> id.equals(powerPlant.getId())).findAny();
-    }
-
-    public PowerPlantRepository getRepositoryManager() {
-        return repositoryManager;
     }
 }

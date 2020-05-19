@@ -1,4 +1,4 @@
-package com.electricity.service.process.user;
+package com.electricity.service.operation.user;
 
 import com.electricity.exeption.InsufficientFundsException;
 import com.electricity.model.dto.impl.PowerPlantCreatingDto;
@@ -7,7 +7,7 @@ import com.electricity.model.user.User;
 import com.electricity.repository.UserRepository;
 import com.electricity.service.plant.PowerPlantPriceSettingService;
 import com.electricity.service.plant.impl.PowerPlantPriceSettingServiceImpl;
-import com.electricity.service.process.plant.PowerPlantProcessManager;
+import com.electricity.service.operation.plant.PowerPlantOperationManager;
 import com.electricity.service.market.ResourceMarket;
 import com.electricity.service.market.impl.ResourceMarketImpl;
 import org.apache.logging.log4j.LogManager;
@@ -18,31 +18,28 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class UserProcessManager {
-    private static final Logger LOGGER = LogManager.getLogger(UserProcessManager.class);
-
+public class UserProcessOperationManager {
+    private static final Logger LOGGER = LogManager.getLogger(UserProcessOperationManager.class);
     private static final int INITIAL_DELAY = 0;
     private static final int REFRESH_TIME = 2;
     private static final TimeUnit TIME_UNIT = TimeUnit.SECONDS;
     private static final int POOL_SIZE = 1;
-
     private final ScheduledExecutorService userScheduledService;
     private final ResourceMarket resourceMarket;
     private final PowerPlantPriceSettingService priceSettingService;
+    private final UserProcessOperationThread userProcessOperationThread;
+    private PowerPlantOperationManager powerPlantOperationManager;
 
-    private final UserProcessThread userProcessThread;
-    private PowerPlantProcessManager powerPlantProcessManager;
-
-    public UserProcessManager(UserRepository repositoryManager, User user) {
+    public UserProcessOperationManager(UserRepository repositoryManager, User user) {
         this.userScheduledService = Executors.newScheduledThreadPool(POOL_SIZE);
         this.resourceMarket = new ResourceMarketImpl();
         this.priceSettingService = new PowerPlantPriceSettingServiceImpl();
-        this.userProcessThread = new UserProcessThread(repositoryManager, user);
-        userScheduledService.scheduleWithFixedDelay(userProcessThread, INITIAL_DELAY, REFRESH_TIME, TIME_UNIT);
+        this.userProcessOperationThread = new UserProcessOperationThread(repositoryManager, user);
+        userScheduledService.scheduleWithFixedDelay(userProcessOperationThread, INITIAL_DELAY, REFRESH_TIME, TIME_UNIT);
     }
 
-    public void injectPowerPlantExecutorReference(PowerPlantProcessManager powerPlantProcessManager) {
-        this.powerPlantProcessManager = powerPlantProcessManager;
+    public void injectPowerPlantExecutorReference(PowerPlantOperationManager powerPlantOperationManager) {
+        this.powerPlantOperationManager = powerPlantOperationManager;
     }
 
     public void buyResourceUsingTransaction(ResourceTransaction resourceTransaction) {
@@ -56,8 +53,8 @@ public class UserProcessManager {
     private void payForTheTransaction(ResourceTransaction processedByMarket) {
 
         try {
-            userProcessThread.payOff(processedByMarket.getTransactionPrice());
-            powerPlantProcessManager.setResourceUsingDeliveryService(processedByMarket);
+            userProcessOperationThread.payOff(processedByMarket.getTransactionPrice());
+            powerPlantOperationManager.setResourceUsingDeliveryService(processedByMarket);
         } catch (InsufficientFundsException e) {
             makeLog(e);
         }
@@ -67,8 +64,8 @@ public class UserProcessManager {
         BigDecimal powerPlantCost = priceSettingService.getPowerPlantCost(powerPlantCreatingDto.getType());
 
         try {
-            userProcessThread.payOff(powerPlantCost);
-            powerPlantProcessManager.createPowerPlantAndAddToThread(powerPlantCreatingDto);
+            userProcessOperationThread.payOff(powerPlantCost);
+            powerPlantOperationManager.createPowerPlantAndAddToThread(powerPlantCreatingDto);
         } catch (InsufficientFundsException e) {
             makeLog(e);
         }
@@ -79,14 +76,16 @@ public class UserProcessManager {
     }
 
     public void stopAndSave() {
-        userProcessThread.stopAndSave();
+        userProcessOperationThread.stopAndSave();
+
+        userScheduledService.shutdown();
     }
 
     public void start(){
-        userProcessThread.start();
+        userProcessOperationThread.start();
     }
 
-    public void shutdownScheduledService(){
-        userScheduledService.shutdown();
+    public User getUser(){
+        return userProcessOperationThread.getUser();
     }
 }

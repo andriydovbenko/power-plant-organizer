@@ -16,7 +16,6 @@ import static com.electricity.enumeration.ResourcePrice.COAL;
 import static com.electricity.enumeration.ResourcePrice.URANIUM;
 
 public class ResourceMarketImpl implements ResourceMarket {
-
     private final Map<PurchasableResourceType, ResourceMarket> transactionMethods;
 
     public ResourceMarketImpl() {

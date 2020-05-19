@@ -1,6 +1,5 @@
 package com.electricity.service.plant.impl;
 
-import com.electricity.enumeration.InitialWorkTimeForUnstorablePowerPlant;
 import com.electricity.enumeration.PowerPlantType;
 import com.electricity.exeption.UnknownPowerPlantTypeException;
 import com.electricity.model.dto.impl.PowerPlantCreatingDto;
@@ -19,6 +18,9 @@ import com.electricity.service.plant.PowerPlantConstructor;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
+
+import static com.electricity.enumeration.InitialWorkTimeForUnstorablePowerPlant.SOLAR;
+import static com.electricity.enumeration.InitialWorkTimeForUnstorablePowerPlant.WIND;
 
 public class PowerPlantConstructorImpl implements PowerPlantConstructor {
     private final Map<PowerPlantType, PowerPlantConstructor> constructionMethods;
@@ -82,7 +84,7 @@ public class PowerPlantConstructorImpl implements PowerPlantConstructor {
     }
 
     private PowerPlant constructNewSolar(PowerPlantCreatingDto powerPlantCreatingDto) {
-        int workTimeLeft = InitialWorkTimeForUnstorablePowerPlant.SOLAR.getWorkTimeLeft();
+        int workTimeLeft = SOLAR.getWorkTimeLeft();
 
         SolarPowerPlant powerPlant = new SolarPowerPlant(new SolarEnergy(workTimeLeft));
 
@@ -94,7 +96,7 @@ public class PowerPlantConstructorImpl implements PowerPlantConstructor {
     }
 
     private PowerPlant constructNewWind(PowerPlantCreatingDto powerPlantCreatingDto) {
-        int workTimeLeft = InitialWorkTimeForUnstorablePowerPlant.WIND.getWorkTimeLeft();
+        int workTimeLeft = WIND.getWorkTimeLeft();
 
         WindPowerPlant powerPlant = new WindPowerPlant(new Wind(workTimeLeft));
 
@@ -106,13 +108,11 @@ public class PowerPlantConstructorImpl implements PowerPlantConstructor {
     }
 
     private PowerPlant throwUnknownPowerPlantException(PowerPlantCreatingDto powerPlantCreatingDto) {
-
         throw new UnknownPowerPlantTypeException("Power plant Type: \"" + powerPlantCreatingDto.getType() +
                 "\" is not being supported by the application");
     }
 
     private void throwUnknownPowerPlantExceptionCausedByNull() {
-
         throw new UnknownPowerPlantTypeException("powerPlantCreatingDto = null. " +
                 "Check the PowerPlantCreatingDto creation method");
     }

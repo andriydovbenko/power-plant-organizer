@@ -1,11 +1,10 @@
-package com.electricity.service.process.plant;
+package com.electricity.service.operation.plant;
 
 import com.electricity.exeption.NoSuchPowerPlantIdException;
 import com.electricity.model.dto.impl.PowerPlantCreatingDto;
 import com.electricity.model.dto.impl.PowerPlantUpdatingDto;
 import com.electricity.model.plant.PowerPlant;
 import com.electricity.model.transaction.ResourceTransaction;
-import com.electricity.repository.PowerPlantRepository;
 import com.electricity.repository.init.PowerPlantInitializer;
 import com.electricity.service.plant.PowerPlantConstructor;
 import com.electricity.service.plant.ResourceDeliveryService;
@@ -19,9 +18,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class PowerPlantProcessManager {
-    private static final Logger LOGGER = LogManager.getLogger(PowerPlantProcessManager.class);
-
+public class PowerPlantOperationManager {
+    private static final Logger LOGGER = LogManager.getLogger(PowerPlantOperationManager.class);
     private static final int INITIAL_DELAY = 0;
     private static final int REFRESH_TIME = 2;
     private static final TimeUnit TIME_UNIT = TimeUnit.SECONDS;
@@ -30,25 +28,25 @@ public class PowerPlantProcessManager {
     private final PowerPlantConstructor powerPlantConstructor;
     private final ResourceDeliveryService resourceDeliveryService;
     private final ScheduledExecutorService powerPlantScheduledService;
-    private final PowerPlantProcessThread powerPlantProcessThread;
+    private final PowerPlantOperationThread powerPlantOperationThread;
 
-    public PowerPlantProcessManager(String tableName) {
+    public PowerPlantOperationManager(String tableName) {
         this.powerPlantConstructor = PowerPlantInitializer.POWER_PLANT_CONSTRUCTOR;
         this.powerPlantScheduledService = Executors.newScheduledThreadPool(POOL_SIZE);
         this.resourceDeliveryService = new ResourceDeliveryServiceImpl();
-        this.powerPlantProcessThread = new PowerPlantProcessThread(tableName);
+        this.powerPlantOperationThread = new PowerPlantOperationThread(tableName);
         this.powerPlantScheduledService.scheduleWithFixedDelay(
-                powerPlantProcessThread, INITIAL_DELAY, REFRESH_TIME, TIME_UNIT);
+                powerPlantOperationThread, INITIAL_DELAY, REFRESH_TIME, TIME_UNIT);
     }
 
     public void createPowerPlantAndAddToThread(PowerPlantCreatingDto creatingDto) {
-        powerPlantProcessThread.addPowerPlant(
+        powerPlantOperationThread.addPowerPlant(
                 powerPlantConstructor.construct(creatingDto)
         );
     }
 
     public PowerPlant getPowerPlantById(String id) throws NoSuchPowerPlantIdException {
-        return powerPlantProcessThread.getOptPowerPlantById(id)
+        return powerPlantOperationThread.getOptPowerPlantById(id)
                 .orElseThrow(() ->
                         new NoSuchPowerPlantIdException("Power Plant with id: \"" + id + "\" does not exist"));
     }
@@ -67,7 +65,7 @@ public class PowerPlantProcessManager {
     }
 
     public void removePowerPlantById(String id) {
-        powerPlantProcessThread.removePowerPlantById(id);
+        powerPlantOperationThread.removePowerPlantById(id);
     }
 
     public void setResourceUsingDeliveryService(ResourceTransaction resourceTransaction) {
@@ -82,22 +80,16 @@ public class PowerPlantProcessManager {
     }
 
     public List<PowerPlant> getAllPowerPlants() {
-        return powerPlantProcessThread.getPowerPlants();
+        return powerPlantOperationThread.getPowerPlants();
     }
 
     public void stopAndSave() {
-        powerPlantProcessThread.stopAndSave();
+        powerPlantOperationThread.stopAndSave();
+
+        powerPlantScheduledService.shutdown();
     }
 
     public void start() {
-        powerPlantProcessThread.start();
-    }
-
-    public PowerPlantRepository getRepositoryManager() {
-        return powerPlantProcessThread.getRepositoryManager();
-    }
-
-    public void shutdownScheduledService(){
-        powerPlantScheduledService.shutdown();
+        powerPlantOperationThread.start();
     }
 }

@@ -10,17 +10,19 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
+import static com.electricity.enumeration.PowerPlantType.*;
+
 public class EnergyProducingServiceImpl implements EnergyProducingService {
     private final Map<PowerPlantType, EnergyProducingService> mappedMethods;
     private double producedPower;
 
     public EnergyProducingServiceImpl() {
         this.mappedMethods = Collections.synchronizedMap(new EnumMap<>(PowerPlantType.class));
-        mappedMethods.put(PowerPlantType.COAL, this::useStorageCapablePlants);
-        mappedMethods.put(PowerPlantType.NUCLEAR, this::useStorageCapablePlants);
-        mappedMethods.put(PowerPlantType.HYDRO, this::useStorageCapablePlants);
-        mappedMethods.put(PowerPlantType.SOLAR, this::useStorageIncapablePlants);
-        mappedMethods.put(PowerPlantType.WIND, this::useStorageIncapablePlants);
+        mappedMethods.put(COAL, this::useStorageCapablePlants);
+        mappedMethods.put(NUCLEAR, this::useStorageCapablePlants);
+        mappedMethods.put(HYDRO, this::useStorageCapablePlants);
+        mappedMethods.put(SOLAR, this::useStorageIncapablePlants);
+        mappedMethods.put(WIND, this::useStorageIncapablePlants);
     }
 
     @Override
