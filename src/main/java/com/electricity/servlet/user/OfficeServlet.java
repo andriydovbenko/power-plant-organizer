@@ -1,6 +1,7 @@
 package com.electricity.servlet.user;
 
 import com.electricity.model.user.User;
+import com.electricity.service.password.encryption.PasswordCryptographer;
 import com.electricity.service.session.UserSession;
 import com.electricity.service.session.UserSessionService;
 import com.electricity.service.session.impl.UserSessionServiceImpl;
@@ -37,7 +38,9 @@ public class OfficeServlet extends HttpServlet {
 
         if (session != null) {
             User user = session.getUser();
-            boolean isPasswordCorrect = user.getPassword().equals(request.getParameter(PASSWORD.getAttribute()));
+            String decryptedPassword = PasswordCryptographer.decrypt(user.getPassword());
+            assert decryptedPassword != null;
+            boolean isPasswordCorrect = decryptedPassword.equals(request.getParameter(PASSWORD.getAttribute()));
 
             if (isPasswordCorrect) {
                 user.setFirstName(request.getParameter(FIRST_NAME.getAttribute()));

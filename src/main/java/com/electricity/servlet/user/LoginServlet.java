@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher(HOME.getPath()).forward(request, response);
         }
 
-        if (isUserRegistered(request)) {
+        if (isUserWithLoginRegistered(request)) {
             checkUserAndCreateSession(request, response);
         } else {
             request.getRequestDispatcher(REGISTER.getPath()).forward(request, response);

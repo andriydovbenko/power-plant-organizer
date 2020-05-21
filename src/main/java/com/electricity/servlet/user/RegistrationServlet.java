@@ -3,6 +3,8 @@ package com.electricity.servlet.user;
 import com.electricity.enumeration.ContextAttribute;
 import com.electricity.model.user.User;
 import com.electricity.repository.UserRepository;
+import com.electricity.service.password.encryption.PasswordCryptographer;
+import com.electricity.service.password.validation.PasswordValidator;
 import com.electricity.service.registration.RegistrationService;
 
 import javax.servlet.ServletException;
@@ -19,6 +21,16 @@ import static com.electricity.enumeration.ContextAttribute.*;
 
 @WebServlet(name = "RegistrationServlet", urlPatterns = "/register")
 public class RegistrationServlet extends HttpServlet {
+    private PasswordValidator validator;
+
+    @Override
+    public void init() {
+        final int minPasswordLength = 4;
+        final int maxPasswordLength = 24;
+
+        validator = PasswordValidator.buildValidator(
+                false, false, false, minPasswordLength, maxPasswordLength);
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,13 +40,16 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String redirectUrl;
-        User user = new User(request.getParameter(ContextAttribute.LOGIN.getAttribute()), request.getParameter("password"));
+        String password = request.getParameter(PASSWORD.getAttribute());
+        String confirmPassword = request.getParameter(CONFIRM_PASSWORD.getAttribute());
+
+        User user = new User(request.getParameter(ContextAttribute.LOGIN.getAttribute()), password);
         user.setFirstName(request.getParameter(FIRST_NAME.getAttribute()));
         user.setLastName(request.getParameter(LAST_NAME.getAttribute()));
 
-        String confirmPassword = request.getParameter(CONFIRM_PASSWORD.getAttribute());
+        boolean isPasswordAppropriate = user.getPassword().equals(confirmPassword) && validatePassword(password);
 
-        if (user.getPassword().equals(confirmPassword)) {
+        if (isPasswordAppropriate) {
             redirectUrl = checkLoginAndRegisterUser(user);
         } else {
             redirectUrl = REGISTER.getPath();
@@ -42,8 +57,15 @@ public class RegistrationServlet extends HttpServlet {
         request.getRequestDispatcher(redirectUrl).forward(request, response);
     }
 
+    private boolean validatePassword(String password) {
+        return validator.validatePassword(password);
+    }
+
     private String checkLoginAndRegisterUser(User user) {
         String redirectUrl;
+
+        encryptPasswordAndSetToUser(user);
+
         @SuppressWarnings("unchecked") final AtomicReference<UserRepository> userRepoAtomicRef =
                 (AtomicReference<UserRepository>) getServletContext().getAttribute(USER_REPOSITORY.getAttribute());
 
@@ -54,10 +76,13 @@ public class RegistrationServlet extends HttpServlet {
             registerServiceAtomicRef.get().register(user);
             redirectUrl = LOGIN.getPath();
         } else {
-            System.err.println(" Login= '" + user.getLogin() + "' is occupied. Choose another login. ");
             redirectUrl = REGISTER.getPath();
         }
-
         return redirectUrl;
+    }
+
+    private void encryptPasswordAndSetToUser(User user) {
+        String encryptedPassword = PasswordCryptographer.encrypt(user.getPassword());
+        user.setPassword(encryptedPassword);
     }
 }

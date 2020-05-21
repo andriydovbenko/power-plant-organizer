@@ -3,6 +3,7 @@ package com.electricity.service.login;
 import com.electricity.enumeration.ContextAttribute;
 import com.electricity.model.user.User;
 import com.electricity.repository.UserRepository;
+import com.electricity.service.password.encryption.PasswordCryptographer;
 import com.electricity.service.session.UserSession;
 import com.electricity.service.session.UserSessionService;
 import com.electricity.service.session.impl.UserSessionServiceImpl;
@@ -24,7 +25,7 @@ public class LoggingService {
         return sessionService.getCookie() != null;
     }
 
-    public static boolean isUserRegistered(HttpServletRequest request) {
+    public static boolean isUserWithLoginRegistered(HttpServletRequest request) {
 
         return !getAtomicUserRepository(request)
                 .get()
@@ -38,7 +39,9 @@ public class LoggingService {
         if (user == null) {
             isPasswordCorrect = false;
         } else {
-            isPasswordCorrect = user.getPassword().equals(request.getParameter(PASSWORD.getAttribute()));
+            String decryptedPassword = PasswordCryptographer.decrypt(user.getPassword());
+            assert decryptedPassword != null;
+            isPasswordCorrect = decryptedPassword.equals(request.getParameter(PASSWORD.getAttribute()));
         }
 
         return isPasswordCorrect;
