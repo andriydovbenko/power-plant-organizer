@@ -61,7 +61,7 @@
                         <th>Payment</th>
                     </tr>
                     </thead>
-                    <c:forEach var="coalFiredPlant" items="${requestScope.nuclearPlants}">
+                    <c:forEach var="coalFiredPlant" items="${requestScope.coalFiredPlants}">
                         <tbody>
                         <form action="${pageContext.request.contextPath}/in/home/shop/resource" method="post">
                             <label>
