@@ -17,7 +17,7 @@ class UraniumStorageTest {
     }
 
     @Test
-    void addResourceToContainer() {
+    void should_add_resource_to_container() {
         assertEquals(initialAmount, uraniumStorage.getResource().getAmount());
 
         Uranium additionalUranium = new Uranium(6000);
@@ -28,7 +28,7 @@ class UraniumStorageTest {
     }
 
     @Test
-    void getCapacity() {
+    void should_get_capacity() {
         int expectedCapacity = 10000;
         assertEquals(expectedCapacity, uraniumStorage.getCapacity());
     }

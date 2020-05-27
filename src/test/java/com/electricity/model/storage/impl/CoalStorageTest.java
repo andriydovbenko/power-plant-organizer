@@ -17,7 +17,7 @@ class CoalStorageTest {
     }
 
     @Test
-    void addResourceToContainer() {
+    void should_add_resource_to_container() {
         assertEquals(initialAmount, coalStorage.getResource().getAmount());
 
         Coal additionalCoal = new Coal(60000);
@@ -28,7 +28,7 @@ class CoalStorageTest {
     }
 
     @Test
-    void getCapacity() {
+    void should_get_capacity() {
         int expectedCapacity = 100000;
         assertEquals(expectedCapacity, coalStorage.getCapacity());
     }

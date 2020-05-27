@@ -17,7 +17,7 @@ class WaterReservoirTest {
     }
 
     @Test
-    void addResourceToContainer() {
+    void should_add_resource_to_container() {
         assertEquals(initialAmount, waterReservoir.getResource().getAmount());
 
         Water additionalWater = new Water(50_000_000);
@@ -28,7 +28,7 @@ class WaterReservoirTest {
     }
 
     @Test
-    void getCapacity() {
+    void should_get_capacity() {
         int expectedCapacity = 100_000_000;
         assertEquals(expectedCapacity, waterReservoir.getCapacity());
     }

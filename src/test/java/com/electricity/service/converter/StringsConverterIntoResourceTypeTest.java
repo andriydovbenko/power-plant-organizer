@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class StringsConverterIntoResourceTypeTest {
 
     @TestFactory
-    Collection<DynamicTest> convertationTests() {
+    Collection<DynamicTest> should_convert_string_into_resource_type() {
         //Given
         final String[] stringTypes = {"COAL", "URANIUM", "NonExistent"};
         final List<PurchasableResourceType> resourceTypes = new ArrayList<>() {{

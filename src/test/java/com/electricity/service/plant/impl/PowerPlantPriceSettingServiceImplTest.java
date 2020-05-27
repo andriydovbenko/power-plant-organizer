@@ -20,7 +20,7 @@ class PowerPlantPriceSettingServiceImplTest {
     private final PowerPlantPriceSettingService service = new PowerPlantPriceSettingServiceImpl();
 
     @TestFactory
-    Stream<DynamicTest> getPowerPlantCost() {
+    Stream<DynamicTest> should_get_plant_cost() {
         //Given
         List<PowerPlantType> plantTypes = new ArrayList<>(List.of(
                 PowerPlantType.COAL, PowerPlantType.NUCLEAR, PowerPlantType.HYDRO,
@@ -43,7 +43,7 @@ class PowerPlantPriceSettingServiceImplTest {
     }
 
     @Test
-    void getPowerPlantCoastFromNullType() {
+    void should_get_plant_cost_by_null_type() {
 
         assertThrows(UnknownPowerPlantTypeException.class,
                 () -> service.getPowerPlantCost(null));

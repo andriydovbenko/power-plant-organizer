@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestPasswordValidator {
     @Test
-    public void testNormalPassword() {
+    public void should_test_normal_password() {
         PasswordValidator validator = PasswordValidator.buildValidator(
                 false, false, false, 6, 16);
 
@@ -19,7 +19,7 @@ public class TestPasswordValidator {
     }
 
     @Test
-    public void testForceNumeric() {
+    public void should_force_numeric() {
         PasswordValidator validator = PasswordValidator.buildValidator(
                 false, false, true, 6, 16);
 
@@ -31,7 +31,7 @@ public class TestPasswordValidator {
     }
 
     @Test
-    public void testForceCapitalLetter() {
+    public void should_force_capital_letter() {
         PasswordValidator validator = PasswordValidator.buildValidator(
                 false, true, false, 6, 16);
 
@@ -43,7 +43,7 @@ public class TestPasswordValidator {
     }
 
     @Test
-    public void testForceSpecialCharacter() {
+    public void should_force_special_character() {
         PasswordValidator validator = PasswordValidator.buildValidator(
                 true, false, false, 6, 16);
 

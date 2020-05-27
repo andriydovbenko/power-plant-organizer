@@ -22,7 +22,7 @@ class EnergyProducingServiceImplTest {
     private final int expectedResourceAmountAfterProducingEnergy = 0;
 
     @Test
-    void produceOnEnergyOnCoalPowerPlant() {
+    void should_produce_energy_on_coal_plant() {
         //Given
         int resourceAmountForOneCircle = ResourceConsumption.COAL.getConsumption();
         Coal coal = new Coal(resourceAmountForOneCircle);
@@ -44,7 +44,7 @@ class EnergyProducingServiceImplTest {
     }
 
     @Test
-    void produceOnEnergyOnNuclearPowerPlant() {
+    void should_produce_energy_on_nuclear_plant() {
         //Given
         int resourceAmountForOneCircle = ResourceConsumption.NUCLEAR.getConsumption();
         Uranium uranium = new Uranium(resourceAmountForOneCircle);
@@ -66,7 +66,7 @@ class EnergyProducingServiceImplTest {
     }
 
     @Test
-    void produceOnEnergyHydroPowerPlant() {
+    void should_produce_energy_on_hydro_pant() {
         //Given
         int resourceAmountForOneCircle = ResourceConsumption.HYDRO.getConsumption();
         Water water = new Water(resourceAmountForOneCircle);
@@ -88,7 +88,7 @@ class EnergyProducingServiceImplTest {
     }
 
     @Test
-    void produceOnEnergyOnSolarPowerPlant() {
+    void should_produce_energy_on_solar_plant() {
         //Given
         int resourceAmountForOneCircle = ResourceConsumption.SOLAR.getConsumption();
         SolarEnergy solarEnergy = new SolarEnergy(resourceAmountForOneCircle);
@@ -108,7 +108,7 @@ class EnergyProducingServiceImplTest {
     }
 
     @Test
-    void produceOnEnergyOnWindPowerPlant() {
+    void should_produce_energy_on_wind_plant() {
         //Given
         int resourceAmountForOneCircle = ResourceConsumption.WIND.getConsumption();
         Wind wind = new Wind(resourceAmountForOneCircle);

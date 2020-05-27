@@ -32,7 +32,7 @@ class ResourceDeliveryServiceImplTest {
     private Executable executable;
 
     @Test
-    void testInappropriatePowerPlantType() {
+    void should_throw_inappropriate_plant_type() {
         PowerPlant powerPlant = new WindPowerPlant(new Wind(initialAmountOfResource));
 
         assertThrows(UnknownResourceTypeException.class,
@@ -40,7 +40,7 @@ class ResourceDeliveryServiceImplTest {
     }
 
     @TestFactory
-    Collection<DynamicTest> setResourceToCoalPowerPlant() {
+    Collection<DynamicTest> should_set_resource_to_coal_plant() {
         int storageCapacity = CoalStorage.CAPACITY;
         int[] resourceAmountRange = {0, 10000, 30000, 50000, 80000};
         int expectedAmountAfterOperation = initialAmountOfResource;
@@ -87,7 +87,7 @@ class ResourceDeliveryServiceImplTest {
     }
 
     @TestFactory
-    Collection<DynamicTest> setResourceToNuclearPowerPlant() {
+    Collection<DynamicTest> should_set_resource_to_nuclear_plant() {
         int storageCapacity = UraniumStorage.CAPACITY;
         int[] resourceAmountRange = {0, 1000, 3000, 5000, 8000};
         int expectedAmountAfterOperation = initialAmountOfResource;

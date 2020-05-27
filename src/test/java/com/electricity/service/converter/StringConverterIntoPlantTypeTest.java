@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class StringConverterIntoPlantTypeTest {
 
     @TestFactory
-    Collection<DynamicTest> convertationTests() {
+    Collection<DynamicTest> should_convert_string_into_plant_type() {
         //Given
         final String[] stringTypes = {"HYDRO", "WIND", "SOLAR", "NUCLEAR", "COAL", "NonExistent"};
         final List<PowerPlantType> powerPlantTypes = new ArrayList<>() {{

@@ -26,7 +26,7 @@ class ResourceMarketImplTest {
     private final String id = "1111";
 
     @TestFactory
-    Collection<DynamicTest> coalTransactionPriceTest() {
+    Collection<DynamicTest> should_check_coal_transaction_price() {
         List<ResourceTransaction> coalTransactions = new ArrayList<>() {{
             for (int resourceAmount : resourceAmounts) {
                 this.add(new ResourceTransaction(id, resourceAmount, coal));
@@ -55,7 +55,7 @@ class ResourceMarketImplTest {
     }
 
     @TestFactory
-    Collection<DynamicTest> uraniumTransactionPriceTest() {
+    Collection<DynamicTest> should_check_uranium_transaction_price() {
 
         List<ResourceTransaction> uraniumTransactions = new ArrayList<>() {{
             for (int resourceAmount : resourceAmounts) {
@@ -85,7 +85,7 @@ class ResourceMarketImplTest {
     }
 
     @Test
-    void nullResourceTypeTest() {
+    void should_throw_null_resource_type_exception() {
         ResourceTransaction nullTypeTransaction = new ResourceTransaction(
                 id, 10, null);
 

@@ -44,7 +44,7 @@ class UserSessionServiceImplTest {
     }
 
     @Test
-    void initUserServiceTest() {
+    void should_verify_initialization_of_user_service() {
         verify(request, times(1)).getCookies();
         verify(request, times(1)).getServletContext();
         verify(servletContext, only()).getAttribute(USER_SESSION.getAttribute());
@@ -52,7 +52,7 @@ class UserSessionServiceImplTest {
     }
 
     @Test
-    void getCookie() {
+    void should_get_cookie() {
         Cookie cookie = service.getCookie();
 
         assertEquals(EXPECTED_COOKIE_NAME, cookie.getName());
@@ -60,14 +60,14 @@ class UserSessionServiceImplTest {
     }
 
     @Test
-    void getSession() {
+    void should_get_session() {
         UserSession session = service.getSession();
 
         assertSame(userSession, session);
     }
 
     @Test
-    void removeSession() {
+    void should_remove_session() {
         when(usersSessions.remove(EXPECTED_COOKIE_VALUE)).thenReturn(userSession);
 
         service.removeSession();

@@ -32,7 +32,7 @@ class PowerPlantConstructorImplTest {
     }
 
     @Test
-    void constructWithNullType() {
+    void should_construct_plant_by_null_type() {
         dto.setType(null);
 
         assertThrows(UnknownPowerPlantTypeException.class, () -> constructor.construct(dto));
@@ -41,7 +41,7 @@ class PowerPlantConstructorImplTest {
     }
 
     @TestFactory
-    Stream<DynamicTest> construct() {
+    Stream<DynamicTest> should_construct_plant_by_all_types() {
         //Given
         List<PowerPlantType> plantTypes = new ArrayList<>(List.of(
                 PowerPlantType.COAL, PowerPlantType.NUCLEAR, PowerPlantType.HYDRO,

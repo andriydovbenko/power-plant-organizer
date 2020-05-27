@@ -12,13 +12,13 @@ class PasswordCryptographerTest {
     private final String encryptedPasswordShort = "10x55ta8BbZrUVaXkzoyEQ==";
 
     @Test
-    void encrypt() {
+    void should_encrypt_password() {
         assertEquals(PasswordCryptographer.encrypt(password), encryptedPassword);
         assertEquals(PasswordCryptographer.encrypt(passwordShort), encryptedPasswordShort);
     }
 
     @Test
-    void decrypt() {
+    void should_decrypt_password() {
         assertEquals(PasswordCryptographer.decrypt(encryptedPassword), password);
         assertEquals(PasswordCryptographer.decrypt(encryptedPasswordShort), passwordShort);
     }
