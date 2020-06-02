@@ -5,17 +5,12 @@ import com.electricity.model.user.User;
 import com.electricity.repository.UserRepository;
 import com.electricity.service.operation.plant.PowerPlantOperationThread;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(PowerPlantOperationThread.class)
 class UserProcessOperationThreadTest {
 
     @Test

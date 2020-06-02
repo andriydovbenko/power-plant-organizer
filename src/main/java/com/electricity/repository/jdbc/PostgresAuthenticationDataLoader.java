@@ -20,7 +20,7 @@ public class PostgresAuthenticationDataLoader {
         fetchFromFile();
     }
 
-    public static synchronized PostgresAuthenticationDataLoader getInstance() {
+    public static PostgresAuthenticationDataLoader getInstance() {
 
         if (instance == null) {
             instance = new PostgresAuthenticationDataLoader();

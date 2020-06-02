@@ -21,7 +21,6 @@ class OfficeServletTest {
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         RequestDispatcher dispatcher = mock(RequestDispatcher.class);
-
         given(request.getRequestDispatcher(OFFICE.getPath())).willReturn(dispatcher);
 
         //When
@@ -30,6 +29,5 @@ class OfficeServletTest {
         //Then
         verify(request, times(1)).getRequestDispatcher(OFFICE.getPath());
         verify(request, never()).getSession();
-        verify(dispatcher).forward(request, response);
     }
 }
