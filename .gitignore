@@ -13,6 +13,8 @@
 
 # Package Files #
 target/
+file/
+logs/
 .idea/
 *.jar
 *.war
