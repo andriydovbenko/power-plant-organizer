@@ -1,4 +1,3 @@
-<%--suppress ALL --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,10 +7,8 @@
 <body>
 <nav class="nav">
     <div class="container">
-
         <div id=" mainListDiv" class="main_list">
             <ul class="navlinks">
-
                 <li><a href="${pageContext.request.contextPath}/in/office">My Office</a></li>
                 <li><a href="${pageContext.request.contextPath}/in/plants">Power Plants</a></li>
                 <li><a href="${pageContext.request.contextPath}/in/home/shop/resource">Resource Shop</a></li>
@@ -27,20 +24,48 @@
     </div>
 </nav>
 <div>
-    <link href="css/home.css" rel="stylesheet" type="text/css">
     <section class="home">
     </section>
     <h2 class="myH2">What is this ?</h2>
-    <p class="myP">This is a responsive fixed navbar animated on scroll</p>
-    <p class="myP">I took inspiration from ABDO STEIF (<a href="https://codepen.io/abdosteif/pen/bRoyMb?editors=1100">https://codepen.io/abdosteif/pen/bRoyMb?editors=1100</a>)
-        and Dicson <a href="https://codepen.io/dicson/pen/waKPgQ">(https://codepen.io/dicson/pen/waKPgQ)</a></p>
-    <p class="myP">I HOPE YOU FIND THIS USEFULL</p>
-    <p class="myP">Albi</p>
-    <p class="myP">
+    <p class="myP">This is a simple Power Plant organizer</p>
+    <p class="myP">After registration each user receives five different Power Plants and funds for operations in this
+        game</p>
+    <p class="myP"><b>User can control working process on each power plant:</b></p>
+    <ul class="myP">
+        <li>Buy resource</li>
+        <li>Buy new power plant</li>
+        <li>Stop or start producing energy</li>
+        <li>Delete power plant</li>
+        <li>Edit power plant information</li>
+    </ul>
+    <p class="myP"><b>Currently in the application exist five types of power plants</b></p>
+    <ol class="myP">
+        <li>Hydro Power Plant</li>
+        <li>Coal-Fired Power Plant</li>
+        <li>Nuclear Power Plant</li>
+        <li>Solar Power Plant</li>
+        <li>Wind Power Plant</li>
+    </ol>
+    <p class="myP">In order to produce energy and earn new funds the power plants utilize resources. As now exist five
+        types of power plant as well exist five types of resources. They can be split on renewable and non-renewable. User
+        is capable to buy non-renewable resources</p>
+    <p class="myP"><b>Renewable:</b></p>
+    <ul class="myP">
+        <li>Water</li>
+        <li>Wind</li>
+        <li>Solar</li>
+    </ul>
+    <p class="myP"><b>Non-renewable:</b></p>
+    <ul class="myP">
+        <li>Uranium</li>
+        <li>Coal</li>
+    </ul>
+    <p class="myP"></p>
+    <p class="myP">For more information please go to <a href="https://github.com/andriydovbenko/power-plant-organizer"> project repository</a>
+        and my  <a href="https://github.com/andriydovbenko">GitHub account</a></p>
     </p>
 </div>
 </body>
-<%--suppress CssUnknownTarget --%>
 <style>
     @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 
@@ -114,11 +139,11 @@
     }
 
     /* Home section */
-
+    /*https://images.unsplash.com/photo-1498550744921-75f79806b8a7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b0f6908fa5e81286213c7211276e6b3d&auto=format&fit=crop&w=1500&q=80*/
     .home {
         width: 100%;
         height: 100vh;
-        background-image: url(https://images.unsplash.com/photo-1498550744921-75f79806b8a7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b0f6908fa5e81286213c7211276e6b3d&auto=format&fit=crop&w=1500&q=80);
+        background-image: url(https://www.renk-ag.com/fileadmin/Branchen_und_Kompetenzen/Branchen/Energieerzeugung/Kraftwerk/renk-branche-kraftwerk-anlage-teaser.jpg);
         background-position: center top;
         background-size: cover;
     }

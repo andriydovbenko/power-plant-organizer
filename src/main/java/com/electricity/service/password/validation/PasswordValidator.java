@@ -23,7 +23,7 @@ public class PasswordValidator {
         }
 
         if (forceNumber) {
-            patternBuilder.append("(?=.*d)");
+            patternBuilder.append("(?=.*\\d)");
         }
 
         patternBuilder.append(".{").append(minLength).append(",").append(maxLength).append("})");

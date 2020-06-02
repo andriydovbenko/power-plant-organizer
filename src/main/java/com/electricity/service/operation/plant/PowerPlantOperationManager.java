@@ -69,7 +69,6 @@ public class PowerPlantOperationManager {
     }
 
     public void setResourceUsingDeliveryService(ResourceTransaction resourceTransaction) {
-
         try {
             PowerPlant powerPlant = getPowerPlantById(resourceTransaction.getPowerPlantId());
             resourceDeliveryService.setResourceToPowerPlant(powerPlant, resourceTransaction);

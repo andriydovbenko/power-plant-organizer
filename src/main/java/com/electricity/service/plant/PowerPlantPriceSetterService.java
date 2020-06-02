@@ -5,7 +5,7 @@ import com.electricity.enumeration.PowerPlantType;
 import java.math.BigDecimal;
 
 @FunctionalInterface
-public interface PowerPlantPriceSettingService {
+public interface PowerPlantPriceSetterService {
 
     BigDecimal getPowerPlantCost(PowerPlantType powerPlantType);
 }

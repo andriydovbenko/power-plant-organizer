@@ -8,6 +8,7 @@ import com.electricity.service.session.UserSession;
 import com.electricity.service.session.UserSessionService;
 import com.electricity.service.session.impl.UserSessionServiceImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,6 +60,7 @@ public class PowerPlantShopServlet extends HttpServlet {
             request.setAttribute(USER.getAttribute(), user);
         }
 
-        request.getRequestDispatcher(SHOP_PLANTS.getPath()).forward(request, response);
+        RequestDispatcher rd = request.getRequestDispatcher(SHOP_PLANTS.getPath());
+        rd.include(request, response);
     }
 }

@@ -16,6 +16,7 @@ public class UserSessionServiceImpl implements UserSessionService {
 
     public UserSessionServiceImpl(HttpServletRequest request) {
         fetchCookieFromRequest(request);
+        fetchUserSessionFromRequest(request);
     }
 
     private void fetchCookieFromRequest(HttpServletRequest request) {
@@ -29,7 +30,9 @@ public class UserSessionServiceImpl implements UserSessionService {
                 }
             }
         }
+    }
 
+    private void fetchUserSessionFromRequest(HttpServletRequest request) {
         if (logCookie != null) {
             @SuppressWarnings("unchecked") final Map<String, UserSession> usersSessions = (Map<String, UserSession>)
                     request.getServletContext().getAttribute(USER_SESSION.getAttribute());

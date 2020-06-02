@@ -5,8 +5,8 @@ import com.electricity.model.dto.impl.PowerPlantCreatingDto;
 import com.electricity.model.transaction.ResourceTransaction;
 import com.electricity.model.user.User;
 import com.electricity.repository.UserRepository;
-import com.electricity.service.plant.PowerPlantPriceSettingService;
-import com.electricity.service.plant.impl.PowerPlantPriceSettingServiceImpl;
+import com.electricity.service.plant.PowerPlantPriceSetterService;
+import com.electricity.service.plant.impl.PowerPlantPriceSetterServiceImpl;
 import com.electricity.service.operation.plant.PowerPlantOperationManager;
 import com.electricity.service.market.ResourceMarket;
 import com.electricity.service.market.impl.ResourceMarketImpl;
@@ -26,20 +26,28 @@ public class UserProcessOperationManager {
     private static final int POOL_SIZE = 1;
     private final ScheduledExecutorService userScheduledService;
     private final ResourceMarket resourceMarket;
-    private final PowerPlantPriceSettingService priceSettingService;
+    private final PowerPlantPriceSetterService priceSetterService;
     private final UserProcessOperationThread userProcessOperationThread;
     private PowerPlantOperationManager powerPlantOperationManager;
 
-    public UserProcessOperationManager(UserRepository repositoryManager, User user) {
+    public UserProcessOperationManager(UserRepository userRepository, User user) {
         this.userScheduledService = Executors.newScheduledThreadPool(POOL_SIZE);
         this.resourceMarket = new ResourceMarketImpl();
-        this.priceSettingService = new PowerPlantPriceSettingServiceImpl();
-        this.userProcessOperationThread = new UserProcessOperationThread(repositoryManager, user);
+        this.priceSetterService = new PowerPlantPriceSetterServiceImpl();
+        this.userProcessOperationThread = new UserProcessOperationThread(userRepository, user);
         userScheduledService.scheduleWithFixedDelay(userProcessOperationThread, INITIAL_DELAY, REFRESH_TIME, TIME_UNIT);
     }
 
     public void injectPowerPlantExecutorReference(PowerPlantOperationManager powerPlantOperationManager) {
         this.powerPlantOperationManager = powerPlantOperationManager;
+    }
+
+    public void start(){
+        userProcessOperationThread.start();
+    }
+
+    public User getUser(){
+        return userProcessOperationThread.getUser();
     }
 
     public void buyResourceUsingTransaction(ResourceTransaction resourceTransaction) {
@@ -61,7 +69,7 @@ public class UserProcessOperationManager {
     }
 
     public void buyPowerPlant(PowerPlantCreatingDto powerPlantCreatingDto) {
-        BigDecimal powerPlantCost = priceSettingService.getPowerPlantCost(powerPlantCreatingDto.getType());
+        BigDecimal powerPlantCost = priceSetterService.getPowerPlantCost(powerPlantCreatingDto.getType());
 
         try {
             userProcessOperationThread.payOff(powerPlantCost);
@@ -79,13 +87,5 @@ public class UserProcessOperationManager {
         userProcessOperationThread.stopAndSave();
 
         userScheduledService.shutdown();
-    }
-
-    public void start(){
-        userProcessOperationThread.start();
-    }
-
-    public User getUser(){
-        return userProcessOperationThread.getUser();
     }
 }

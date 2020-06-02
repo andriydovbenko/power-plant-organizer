@@ -6,12 +6,14 @@ import com.electricity.service.session.UserSession;
 import com.electricity.service.session.UserSessionService;
 import com.electricity.service.session.impl.UserSessionServiceImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import static com.electricity.enumeration.AppViewPath.OFFICE;
 import static com.electricity.enumeration.ContextAttribute.*;
@@ -28,7 +30,8 @@ public class OfficeServlet extends HttpServlet {
             request.setAttribute(USER.getAttribute(), user);
         }
 
-        request.getRequestDispatcher(OFFICE.getPath()).forward(request, response);
+        RequestDispatcher rd = request.getRequestDispatcher(OFFICE.getPath());
+        rd.include(request, response);
     }
 
     @Override
@@ -45,9 +48,23 @@ public class OfficeServlet extends HttpServlet {
             if (isPasswordCorrect) {
                 user.setFirstName(request.getParameter(FIRST_NAME.getAttribute()));
                 user.setLastName(request.getParameter(LAST_NAME.getAttribute()));
+            } else {
+                showIncorrectPasswordAlert(response);
             }
         }
 
-        doGet(request, response);
+        doGet(request,response);
+    }
+
+    private void showIncorrectPasswordAlert(HttpServletResponse response)
+            throws IOException {
+        PrintWriter pw = response.getWriter();
+        pw.println("<script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js'></script>");
+        pw.println("<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>");
+        pw.println("<script>");
+        pw.println("$(document).ready(function(){");
+        pw.println("swal ( 'Password is incorrect !' ,  ' ' ,  'error' );");
+        pw.println("});");
+        pw.println("</script>");
     }
 }

@@ -2,7 +2,7 @@ package com.electricity.service.plant.impl;
 
 import com.electricity.enumeration.PowerPlantType;
 import com.electricity.exeption.UnknownPowerPlantTypeException;
-import com.electricity.service.plant.PowerPlantPriceSettingService;
+import com.electricity.service.plant.PowerPlantPriceSetterService;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -11,10 +11,10 @@ import java.util.Map;
 
 import static com.electricity.enumeration.PowerPlantCost.*;
 
-public class PowerPlantPriceSettingServiceImpl implements PowerPlantPriceSettingService {
-    private final Map<PowerPlantType, PowerPlantPriceSettingService> priceGettingMethods;
+public class PowerPlantPriceSetterServiceImpl implements PowerPlantPriceSetterService {
+    private final Map<PowerPlantType, PowerPlantPriceSetterService> priceGettingMethods;
 
-    public PowerPlantPriceSettingServiceImpl() {
+    public PowerPlantPriceSetterServiceImpl() {
         this.priceGettingMethods = Collections.synchronizedMap(new EnumMap<>(PowerPlantType.class));
         priceGettingMethods.put(PowerPlantType.COAL, this::getCoalFiredPowerPlantPrice);
         priceGettingMethods.put(PowerPlantType.NUCLEAR, this::getNuclearPowerPlantPrice);

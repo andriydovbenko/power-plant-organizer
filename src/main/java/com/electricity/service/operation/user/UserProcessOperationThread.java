@@ -13,13 +13,13 @@ import static com.electricity.enumeration.EnergyCost.ENERGY;
 
 public class UserProcessOperationThread implements Runnable {
     private static final Logger LOGGER = LogManager.getLogger(UserProcessOperationThread.class);
-    private final UserRepository repositoryManager;
+    private final UserRepository userRepository;
     private final User user;
     private boolean isRunning;
     private final BigDecimal pricePerMegawatt;
 
-    public UserProcessOperationThread(UserRepository repositoryManager, User user) {
-        this.repositoryManager = repositoryManager;
+    public UserProcessOperationThread(UserRepository userRepository, User user) {
+        this.userRepository = userRepository;
         this.user = user;
         this.isRunning = false;
         this.pricePerMegawatt = ENERGY.getCost();
@@ -32,6 +32,14 @@ public class UserProcessOperationThread implements Runnable {
                     .add(user.getCurrentFundsAmount());
 
             user.setCurrentFundsAmount(newFundsAmount);
+        }
+    }
+
+    public void start() {
+        if (user != null) {
+            this.isRunning = true;
+        } else {
+            LOGGER.debug("The start of thread has failed. The reason: 'User == null'");
         }
     }
 
@@ -53,14 +61,10 @@ public class UserProcessOperationThread implements Runnable {
     public void stopAndSave() {
         this.isRunning = false;
 
-        repositoryManager.update(user);
+        userRepository.update(user);
     }
 
-    public void start() {
-        if (user != null) {
-            this.isRunning = true;
-        } else {
-            LOGGER.debug("Start failed. The reason: 'User == null'");
-        }
+    public boolean isRunning(){
+        return isRunning;
     }
 }
