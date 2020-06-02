@@ -14,6 +14,7 @@ import java.util.Map;
 import static com.electricity.enumeration.ContextAttribute.USER_SESSION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 class UserSessionServiceImplTest {
@@ -30,21 +31,23 @@ class UserSessionServiceImplTest {
 
     @BeforeEach
     public void beforeEach() {
+        //Given
         Cookie cookie = new Cookie(EXPECTED_COOKIE_NAME, EXPECTED_COOKIE_VALUE);
         Cookie[] cookies = new Cookie[]{cookie};
 
         usersSessions.put(EXPECTED_COOKIE_VALUE, userSession);
 
-        when(request.getCookies()).thenReturn(cookies);
-        when(request.getServletContext()).thenReturn(servletContext);
-        when(servletContext.getAttribute(USER_SESSION.getAttribute())).thenReturn(usersSessions);
-        when(usersSessions.get(EXPECTED_COOKIE_VALUE)).thenReturn(userSession);
+        given(request.getCookies()).willReturn(cookies);
+        given(request.getServletContext()).willReturn(servletContext);
+        given(servletContext.getAttribute(USER_SESSION.getAttribute())).willReturn(usersSessions);
+        given(usersSessions.get(EXPECTED_COOKIE_VALUE)).willReturn(userSession);
 
         service = new UserSessionServiceImpl(request);
     }
 
     @Test
     void should_verify_initialization_of_user_service() {
+        //Then
         verify(request, times(1)).getCookies();
         verify(request, times(1)).getServletContext();
         verify(servletContext, only()).getAttribute(USER_SESSION.getAttribute());
@@ -53,25 +56,28 @@ class UserSessionServiceImplTest {
 
     @Test
     void should_get_cookie() {
+        //When
         Cookie cookie = service.getCookie();
-
+        //Then
         assertEquals(EXPECTED_COOKIE_NAME, cookie.getName());
         assertEquals(EXPECTED_COOKIE_VALUE, cookie.getValue());
     }
 
     @Test
     void should_get_session() {
+        //When
         UserSession session = service.getSession();
-
+        //Then
         assertSame(userSession, session);
     }
 
     @Test
     void should_remove_session() {
-        when(usersSessions.remove(EXPECTED_COOKIE_VALUE)).thenReturn(userSession);
-
+        //Given
+        given(usersSessions.remove(EXPECTED_COOKIE_VALUE)).willReturn(userSession);
+        //When
         service.removeSession();
-
+        //Then
         verify(usersSessions, times(1)).remove(EXPECTED_COOKIE_VALUE);
     }
 }

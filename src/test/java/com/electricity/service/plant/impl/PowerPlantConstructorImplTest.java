@@ -41,7 +41,7 @@ class PowerPlantConstructorImplTest {
     }
 
     @TestFactory
-    Stream<DynamicTest> should_construct_plant_by_all_types() {
+    Stream<DynamicTest> should_construct_plant_by_all_types () {
         //Given
         List<PowerPlantType> plantTypes = new ArrayList<>(List.of(
                 PowerPlantType.COAL, PowerPlantType.NUCLEAR, PowerPlantType.HYDRO,
