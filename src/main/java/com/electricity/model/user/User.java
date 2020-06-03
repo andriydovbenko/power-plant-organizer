@@ -51,7 +51,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public synchronized BigDecimal getCurrentFundsAmount() {
+    public BigDecimal getCurrentFundsAmount() {
         return currentFundsAmount;
     }
 
