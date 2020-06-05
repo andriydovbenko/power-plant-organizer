@@ -15,8 +15,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import static com.electricity.enumeration.Driver.POSTGRES;
-import static com.electricity.enumeration.PowerPlantColumnName.*;
+import static com.electricity.enumeration.path.Driver.POSTGRES;
+import static com.electricity.enumeration.repo.PowerPlantColumnName.*;
 
 public class PowerPlantRepository {
     private static final Logger LOGGER = LogManager.getLogger(PowerPlantRepository.class);

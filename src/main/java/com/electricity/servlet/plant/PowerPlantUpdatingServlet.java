@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.electricity.enumeration.AppViewPath.PLANTS_UPDATE;
-import static com.electricity.enumeration.ContextAttribute.*;
+import static com.electricity.enumeration.path.AppViewPath.PLANTS_UPDATE;
+import static com.electricity.enumeration.attribute.ContextAttribute.*;
 
 @WebServlet(name = "PowerPlantUpdateServlet", urlPatterns = "/in/plant/update")
 public class PowerPlantUpdatingServlet extends HttpServlet {

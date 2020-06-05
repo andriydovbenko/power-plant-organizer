@@ -1,6 +1,6 @@
 package com.electricity.model.user;
 
-import com.electricity.enumeration.TableName;
+import com.electricity.enumeration.repo.TableName;
 
 import java.math.BigDecimal;
 import java.util.Objects;

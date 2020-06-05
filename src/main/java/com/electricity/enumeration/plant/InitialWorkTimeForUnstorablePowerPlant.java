@@ -1,4 +1,4 @@
-package com.electricity.enumeration;
+package com.electricity.enumeration.plant;
 
 public enum InitialWorkTimeForUnstorablePowerPlant {
     SOLAR(1200),

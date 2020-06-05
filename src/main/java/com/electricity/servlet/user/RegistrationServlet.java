@@ -1,7 +1,7 @@
 package com.electricity.servlet.user;
 
-import com.electricity.enumeration.AlertCode;
-import com.electricity.enumeration.ContextAttribute;
+import com.electricity.enumeration.alert.AlertCode;
+import com.electricity.enumeration.attribute.ContextAttribute;
 import com.electricity.model.user.User;
 import com.electricity.repository.UserRepository;
 import com.electricity.service.password.encryption.PasswordCryptographer;
@@ -18,10 +18,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.electricity.enumeration.AlertCode.*;
-import static com.electricity.enumeration.AppViewPath.LOGIN;
-import static com.electricity.enumeration.AppViewPath.REGISTER;
-import static com.electricity.enumeration.ContextAttribute.*;
+import static com.electricity.enumeration.alert.AlertCode.*;
+import static com.electricity.enumeration.path.AppViewPath.LOGIN;
+import static com.electricity.enumeration.path.AppViewPath.REGISTER;
+import static com.electricity.enumeration.attribute.ContextAttribute.*;
 
 @WebServlet(name = "RegistrationServlet", urlPatterns = "/register")
 public class RegistrationServlet extends HttpServlet {

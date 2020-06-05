@@ -1,6 +1,6 @@
 package com.electricity.servlet.user;
 
-import com.electricity.enumeration.AlertCode;
+import com.electricity.enumeration.alert.AlertCode;
 import com.electricity.model.user.User;
 import com.electricity.service.session.UserSession;
 import com.electricity.service.session.impl.UserSessionImpl;
@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static com.electricity.enumeration.AlertCode.INCORRECT_LOGIN;
-import static com.electricity.enumeration.AlertCode.INCORRECT_PASSWORD;
-import static com.electricity.enumeration.AppViewPath.HOME;
-import static com.electricity.enumeration.AppViewPath.LOGIN;
-import static com.electricity.enumeration.ContextAttribute.LOGGED_IN;
+import static com.electricity.enumeration.alert.AlertCode.INCORRECT_LOGIN;
+import static com.electricity.enumeration.alert.AlertCode.INCORRECT_PASSWORD;
+import static com.electricity.enumeration.path.AppViewPath.HOME;
+import static com.electricity.enumeration.path.AppViewPath.LOGIN;
+import static com.electricity.enumeration.attribute.ContextAttribute.LOGGED_IN;
 import static com.electricity.service.login.LoggingService.*;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")

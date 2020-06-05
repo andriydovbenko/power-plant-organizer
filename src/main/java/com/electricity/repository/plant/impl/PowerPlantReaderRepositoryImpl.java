@@ -19,10 +19,10 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.util.*;
 
-import static com.electricity.enumeration.Driver.POSTGRES;
-import static com.electricity.enumeration.PowerPlantColumnName.*;
-import static com.electricity.enumeration.PowerPlantCost.*;
-import static com.electricity.enumeration.UserColumnName.ID;
+import static com.electricity.enumeration.path.Driver.POSTGRES;
+import static com.electricity.enumeration.repo.PowerPlantColumnName.*;
+import static com.electricity.enumeration.plant.PowerPlantCost.*;
+import static com.electricity.enumeration.repo.UserColumnName.ID;
 
 public class PowerPlantReaderRepositoryImpl implements PowerPlantReaderRepository, PowerPlantSwitcher {
     private static final Logger LOGGER = LogManager.getLogger(PowerPlantReaderRepositoryImpl.class);

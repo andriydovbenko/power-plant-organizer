@@ -1,6 +1,6 @@
 <%--suppress HtmlFormInputWithoutLabel --%>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.LOGIN" %>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.PASSWORD" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.LOGIN" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.PASSWORD" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">

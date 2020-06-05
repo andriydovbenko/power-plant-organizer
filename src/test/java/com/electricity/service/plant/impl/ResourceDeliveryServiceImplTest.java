@@ -1,6 +1,6 @@
 package com.electricity.service.plant.impl;
 
-import com.electricity.enumeration.PurchasableResourceType;
+import com.electricity.enumeration.resource.PurchasableResourceType;
 import com.electricity.exeption.NotEnoughStorageSpaceException;
 import com.electricity.exeption.UnknownResourceTypeException;
 import com.electricity.model.plant.PowerPlant;

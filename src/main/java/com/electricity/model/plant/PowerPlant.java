@@ -1,6 +1,6 @@
 package com.electricity.model.plant;
 
-import com.electricity.enumeration.PowerPlantType;
+import com.electricity.enumeration.plant.PowerPlantType;
 
 import java.util.Objects;
 import java.util.UUID;

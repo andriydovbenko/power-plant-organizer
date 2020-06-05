@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 
-import static com.electricity.enumeration.EnergyCost.ENERGY;
+import static com.electricity.enumeration.plant.EnergyCost.ENERGY;
 
 public class UserProcessOperationThread implements Runnable {
     private static final Logger LOGGER = LogManager.getLogger(UserProcessOperationThread.class);

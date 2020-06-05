@@ -1,7 +1,7 @@
 package com.electricity.service.market.impl;
 
-import com.electricity.enumeration.PurchasableResourceType;
-import com.electricity.enumeration.ResourcePrice;
+import com.electricity.enumeration.resource.PurchasableResourceType;
+import com.electricity.enumeration.resource.ResourcePrice;
 import com.electricity.exeption.UnknownResourceTypeException;
 import com.electricity.model.transaction.ResourceTransaction;
 import com.electricity.service.market.ResourceMarket;

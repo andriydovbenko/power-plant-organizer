@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.electricity.enumeration.ContextAttribute.USER_SESSION;
+import static com.electricity.enumeration.attribute.ContextAttribute.USER_SESSION;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.BDDMockito.given;

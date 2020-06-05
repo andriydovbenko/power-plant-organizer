@@ -1,6 +1,6 @@
 package com.electricity.service.plant.impl;
 
-import com.electricity.enumeration.PowerPlantType;
+import com.electricity.enumeration.plant.PowerPlantType;
 import com.electricity.exeption.UnknownPowerPlantTypeException;
 import com.electricity.model.dto.impl.PowerPlantCreatingDto;
 import com.electricity.model.plant.PowerPlant;
@@ -19,8 +19,8 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static com.electricity.enumeration.InitialWorkTimeForUnstorablePowerPlant.SOLAR;
-import static com.electricity.enumeration.InitialWorkTimeForUnstorablePowerPlant.WIND;
+import static com.electricity.enumeration.plant.InitialWorkTimeForUnstorablePowerPlant.SOLAR;
+import static com.electricity.enumeration.plant.InitialWorkTimeForUnstorablePowerPlant.WIND;
 
 public class PowerPlantConstructorImpl implements PowerPlantConstructor {
     private final Map<PowerPlantType, PowerPlantConstructor> constructionMethods;

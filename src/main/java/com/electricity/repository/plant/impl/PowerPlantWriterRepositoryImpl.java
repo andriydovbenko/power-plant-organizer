@@ -1,6 +1,6 @@
 package com.electricity.repository.plant.impl;
 
-import com.electricity.enumeration.PowerPlantType;
+import com.electricity.enumeration.plant.PowerPlantType;
 import com.electricity.exeption.UnknownPowerPlantTypeException;
 import com.electricity.model.plant.PowerPlant;
 import com.electricity.model.plant.StorageCapableAbstractPlant;
@@ -16,9 +16,9 @@ import java.sql.Statement;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static com.electricity.enumeration.Driver.POSTGRES;
-import static com.electricity.enumeration.PowerPlantColumnName.*;
-import static com.electricity.enumeration.PowerPlantType.*;
+import static com.electricity.enumeration.path.Driver.POSTGRES;
+import static com.electricity.enumeration.repo.PowerPlantColumnName.*;
+import static com.electricity.enumeration.plant.PowerPlantType.*;
 
 public class PowerPlantWriterRepositoryImpl implements PowerPlantWriterRepository {
     private static final Logger LOGGER = LogManager.getLogger(PowerPlantWriterRepositoryImpl.class);

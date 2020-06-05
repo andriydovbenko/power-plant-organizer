@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import static com.electricity.enumeration.AppViewPath.HOME;
+import static com.electricity.enumeration.path.AppViewPath.HOME;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 

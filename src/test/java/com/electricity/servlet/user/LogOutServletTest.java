@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.electricity.enumeration.AppViewPath.LOGOUT;
+import static com.electricity.enumeration.path.AppViewPath.LOGOUT;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 

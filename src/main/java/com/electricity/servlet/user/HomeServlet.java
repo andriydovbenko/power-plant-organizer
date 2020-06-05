@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.electricity.enumeration.AppViewPath.HOME;
+import static com.electricity.enumeration.path.AppViewPath.HOME;
 
 @WebServlet(name = "HomeServlet", urlPatterns = "/in/home")
 public class HomeServlet extends HttpServlet {

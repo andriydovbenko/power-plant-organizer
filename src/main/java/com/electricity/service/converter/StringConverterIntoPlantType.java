@@ -1,6 +1,6 @@
 package com.electricity.service.converter;
 
-import com.electricity.enumeration.PowerPlantType;
+import com.electricity.enumeration.plant.PowerPlantType;
 
 import java.util.ArrayList;
 import java.util.List;

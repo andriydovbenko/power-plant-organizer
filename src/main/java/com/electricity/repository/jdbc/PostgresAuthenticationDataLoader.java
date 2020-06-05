@@ -5,32 +5,56 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Objects;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class PostgresAuthenticationDataLoader {
     private static final Logger LOGGER = LogManager.getLogger(PostgresAuthenticationDataLoader.class);
-    private static final String PATH_TO_AUTHENTICATION_DATA = "D:\\Data\\jdbcConnectionData.txt";
+    private static boolean isLocalApp;
     private String url;
     private String username;
     private String password;
 
     private static PostgresAuthenticationDataLoader instance;
 
+    //fetching sensitive data from PC drive or from project properties
     private PostgresAuthenticationDataLoader() {
-        fetchFromFile();
+        if (isLocalApp) {
+            fetchFromFile();
+        } else {
+            fetchFromProjectProperties();
+        }
     }
 
     public static PostgresAuthenticationDataLoader getInstance() {
-
         if (instance == null) {
             instance = new PostgresAuthenticationDataLoader();
+            isLocalApp = false;
         }
 
         return instance;
     }
 
+    private void fetchFromProjectProperties() {
+        String propertiesPath = "db.properties";
+        File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource(propertiesPath)).getFile());
+        try  (FileReader fileReader = new FileReader(file)){
+            Properties properties = new Properties();
+            properties.load(fileReader);
+            url = properties.getProperty("postgres.db.url");
+            username = properties.getProperty("postgres.db.user");
+            password = properties.getProperty("postgres.db.password");
+        } catch (IOException e) {
+            LOGGER.error("DB properties file didn't load properly. Try to check 'resources/db.properties'");
+        }
+    }
+
     private void fetchFromFile() {
-        File file = new File(PATH_TO_AUTHENTICATION_DATA);
+        String pathToAuthenticationData = "D:\\Data\\jdbcConnectionData.txt";
+        File file = new File(pathToAuthenticationData);
 
         try (Scanner scanner = new Scanner(file)) {
             this.url = scanner.nextLine();
@@ -39,7 +63,7 @@ public class PostgresAuthenticationDataLoader {
         } catch (FileNotFoundException e) {
             StringBuilder messageInfo = new StringBuilder();
             messageInfo.append(" File with jdbc data connection not found or data are illegal.").append(" Check file=")
-                    .append(PATH_TO_AUTHENTICATION_DATA).append(" Message: ").append(e.getMessage());
+                    .append(pathToAuthenticationData).append(" Message: ").append(e.getMessage());
             LOGGER.error(messageInfo);
         }
     }

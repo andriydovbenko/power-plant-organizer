@@ -1,6 +1,6 @@
 package com.electricity.service.plant.impl;
 
-import com.electricity.enumeration.PowerPlantType;
+import com.electricity.enumeration.plant.PowerPlantType;
 import com.electricity.model.plant.PowerPlant;
 import com.electricity.model.plant.StorageCapableAbstractPlant;
 import com.electricity.model.plant.StorageIncapableAbstractPlant;
@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static com.electricity.enumeration.PowerPlantType.*;
+import static com.electricity.enumeration.plant.PowerPlantType.*;
 
 public class EnergyProducingServiceImpl implements EnergyProducingService {
     private final Map<PowerPlantType, EnergyProducingService> mappedMethods;

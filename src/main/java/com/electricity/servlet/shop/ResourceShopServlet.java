@@ -1,7 +1,7 @@
 package com.electricity.servlet.shop;
 
-import com.electricity.enumeration.PowerPlantType;
-import com.electricity.enumeration.PurchasableResourceType;
+import com.electricity.enumeration.plant.PowerPlantType;
+import com.electricity.enumeration.resource.PurchasableResourceType;
 import com.electricity.model.plant.PowerPlant;
 import com.electricity.model.transaction.ResourceTransaction;
 import com.electricity.model.user.User;
@@ -19,8 +19,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.electricity.enumeration.AppViewPath.SHOP_RESOURCE;
-import static com.electricity.enumeration.ContextAttribute.*;
+import static com.electricity.enumeration.path.AppViewPath.SHOP_RESOURCE;
+import static com.electricity.enumeration.attribute.ContextAttribute.*;
 
 @WebServlet(name = "ResourceShopServlet", urlPatterns = "/in/home/shop/resource")
 public class ResourceShopServlet extends HttpServlet {

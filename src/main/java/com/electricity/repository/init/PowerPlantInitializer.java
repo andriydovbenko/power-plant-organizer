@@ -8,7 +8,7 @@ import com.electricity.service.plant.impl.PowerPlantConstructorImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.electricity.enumeration.PowerPlantType.*;
+import static com.electricity.enumeration.plant.PowerPlantType.*;
 
 public class PowerPlantInitializer {
 

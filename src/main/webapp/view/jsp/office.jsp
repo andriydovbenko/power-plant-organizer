@@ -1,8 +1,8 @@
 <%--suppress HtmlFormInputWithoutLabel --%>
 <%--suppress ALL --%>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.FIRST_NAME" %>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.LAST_NAME" %>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.*" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.FIRST_NAME" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.LAST_NAME" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" %>

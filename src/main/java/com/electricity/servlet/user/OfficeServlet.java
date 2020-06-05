@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static com.electricity.enumeration.AppViewPath.OFFICE;
-import static com.electricity.enumeration.ContextAttribute.*;
+import static com.electricity.enumeration.path.AppViewPath.OFFICE;
+import static com.electricity.enumeration.attribute.ContextAttribute.*;
 
 @WebServlet(name = "OfficeServlet", urlPatterns = "/in/office")
 public class OfficeServlet extends HttpServlet {

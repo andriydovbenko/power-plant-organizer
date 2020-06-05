@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static com.electricity.enumeration.AppViewPath.PLANTS;
-import static com.electricity.enumeration.ContextAttribute.*;
+import static com.electricity.enumeration.path.AppViewPath.PLANTS;
+import static com.electricity.enumeration.attribute.ContextAttribute.*;
 
 @WebServlet(name = "PowerPlantServlet", urlPatterns = "/in/plants")
 public class PowerPlantsServlet extends HttpServlet {
