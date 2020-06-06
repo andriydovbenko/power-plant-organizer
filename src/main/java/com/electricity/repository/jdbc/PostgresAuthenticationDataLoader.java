@@ -32,7 +32,7 @@ public class PostgresAuthenticationDataLoader {
     public static PostgresAuthenticationDataLoader getInstance() {
         if (instance == null) {
             instance = new PostgresAuthenticationDataLoader();
-            isLocalApp = false;
+            isLocalApp = true;
         }
 
         return instance;
