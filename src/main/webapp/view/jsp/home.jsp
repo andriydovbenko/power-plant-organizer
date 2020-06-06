@@ -46,8 +46,8 @@
         <li>Solar Power Plant</li>
         <li>Wind Power Plant</li>
     </ol>
-    <p class="myP">In order to produce energy and earn new funds the power plants utilize resources. As now exist five
-        types of power plant as well exist five types of resources. They can be split on renewable and non-renewable. User
+    <p class="myP">In order to produce energy and earn new funds the power plants utilize resources. For now exist five
+        types of power plants and five types of resources. They can be split on renewable and non-renewable. User
         is capable to buy non-renewable resources</p>
     <p class="myP"><b>Renewable:</b></p>
     <ul class="myP">

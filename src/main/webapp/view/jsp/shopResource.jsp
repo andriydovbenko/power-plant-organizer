@@ -48,7 +48,7 @@
                             <p><b>Current funds: </b><fmt:formatNumber type="number" groupingUsed="false"
                                                                        value="${requestScope.user.currentFundsAmount}"/>
                             </p>
-                            <p><b>Uranium price per item: </b><c:out value="<%=ResourcePrice.COAL.getPrice()%>"/>
+                            <p><b>Coal price per item: </b><c:out value="<%=ResourcePrice.COAL.getPrice()%>"/>
                             </p>
                         </div>
                     </div>
