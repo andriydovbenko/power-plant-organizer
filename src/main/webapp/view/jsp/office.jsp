@@ -1,8 +1,7 @@
 <%--suppress HtmlFormInputWithoutLabel --%>
-<%--suppress ELValidationInJSP --%>
-<%@ page import="com.electricity.enumeration.attribute.ContextAttribute" %>
-<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.NUMBER_OF_EMPLOYEES" %>
-<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.COUNTRY" %>
+<%--suppress ALL --%>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.FIRST_NAME" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.LAST_NAME" %>
 <%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -13,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
-    <title>Power Plant</title>
+    <title>Office</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -22,8 +21,8 @@
 <body>
 <div class="update-plant-form">
 
-    <form action="${pageContext.request.contextPath}/in/plant/update" method="post">
-        <h2>Plant</h2>
+    <form action="${pageContext.request.contextPath}/in/office" method="post">
+        <h2>Office</h2>
         <div class="form-group">
             <div class="row">
                 <div class="hint-text">
@@ -32,81 +31,76 @@
                         <tr>
                             <td>
                                 <strong>
-                                    <span class="text-primary"></span>
-                                    Type
+                                    <span class="glyphicon glyphicon-user  text-primary"></span>
+                                    Login
                                 </strong>
                             </td>
                             <td class="text-primary">
-                                <c:out value="${requestScope.powerPlant.type}"/>
+                                <c:out value="${requestScope.user.login}"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <strong>
-                                    <span class="text-primary"></span>
-                                    Country
+                                    <span class="glyphicon glyphicon-cloud text-primary"></span>
+                                    First Name
                                 </strong>
                             </td>
                             <td class="text-primary">
-                                <c:out value="${requestScope.powerPlant.country}"/>
+                                <c:out value="${requestScope.user.firstName}"/>
                             </td>
                         </tr>
 
                         <tr>
                             <td>
                                 <strong>
-                                    <span class="text-primary"></span>
-                                    Number of employee
+                                    <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                    Last Name
                                 </strong>
                             </td>
                             <td class="text-primary">
-                                <c:out value="${requestScope.powerPlant.numberOfEmployees}"/>
+                                <c:out value="${requestScope.user.lastName}"/>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <strong>
-                                    <span class="text-primary"></span>
-                                    Works
+                                    <span class="glyphicon glyphicon-usd text-primary"></span>
+                                    Funds
                                 </strong>
                             </td>
                             <td class="text-primary">
-                                <c:out value="${requestScope.powerPlant.working}"/>
+                                <fmt:formatNumber type="number" groupingUsed="false"
+                                                  value="${requestScope.user.currentFundsAmount}"/>
                             </td>
                         </tr>
+
                         </tbody>
                     </table>
                 </div>
 
-                <p class="hint-text" style="font-size:20px">Modify information</p>
+                <p class="hint-text" style="font-size:20px">Change your information</p>
                 <div class="col-xs-6">
-                    <input type="text" class="form-control" name="<%=COUNTRY.getAttribute()%>"
-                           value="${requestScope.powerPlant.country}"
+                    <input type="text" class="form-control" name="<%=FIRST_NAME.getAttribute()%>" placeholder="First Name"
                            required="required">
                 </div>
                 <div class="col-xs-6">
-                    <input type="number" class="form-control" name="<%=NUMBER_OF_EMPLOYEES.getAttribute()%>"
-                           value="${requestScope.powerPlant.numberOfEmployees}" required="required">
+                    <input type="text" class="form-control" name="<%=LAST_NAME.getAttribute()%>" placeholder="Last Name"
+                           required="required">
                 </div>
-                <div class="col-xs-6">
-                    <input type="radio" id="<%=START.getAttribute()%>" name="<%=CHOICE.getAttribute()%>"
-                           value="<%=START.getAttribute()%>" required="required">
-                    <label for="<%=START.getAttribute()%>">Start</label><br>
-                    <input type="radio" id="<%=STOP.getAttribute()%>" name="<%=CHOICE.getAttribute()%>"
-                           value="<%=STOP.getAttribute()%>">
-                    <label for="<%=STOP.getAttribute()%>">Stop</label><br><br>
-                </div>
-                <label>
-                    <input type="text" hidden name="<%=PLANT_ID.getAttribute()%>"
-                           value="${requestScope.powerPlant.id}"/>
-                </label>
             </div>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Save</button>
+            <input type="password" class="form-control" name="<%=PASSWORD.getAttribute()%>" placeholder="Your password"
+                   required="required">
+        </div>
+
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-success btn-lg btn-block">Save changes</button>
         </div>
     </form>
-    <h4 class="text-center"><a href="${pageContext.request.contextPath}/in/plants">return back</a></h4>
+    <h4 class="text-center"><a href="http://localhost:8080/in/home">return back</a></h4>
 </div>
 </body>
 <style>
@@ -216,5 +210,6 @@
     .update-plant-form form a:hover {
         text-decoration: underline;
     }
+
 </style>
 </html>

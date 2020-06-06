@@ -34,7 +34,7 @@
                     Plants</a>
             </li>
             <li class="nav-item">
-                <a href="http://localhost:8080/in/home">Return back</a>
+                <a href="${pageContext.request.contextPath}/in/home">Return back</a>
             </li>
 
         </ul>
