@@ -1,5 +1,5 @@
 # Power Plant Organizer
-This is a training project, which was created as a personal project task for EPAM. 
+This is a training project, which was created as a project task for EPAM. 
 
 ## Table of contents
 * [Links](#links)
@@ -12,17 +12,17 @@ This is a training project, which was created as a personal project task for EPA
 ## Links
 * [Registration](https://power-plant-organizer.herokuapp.com/register)
 * [Login](https://power-plant-organizer.herokuapp.com/login)
-* [Home page](https://power-plant-organizer.herokuapp.com/in/home)
+* [Home page](https://power-plant-organizer.herokuapp.com/in/home) (you need to be logged in)
 
 ## General info
 After registration each user receives five different Power Plants and funds for 
 operations in this game. In order to produce energy and earn new funds the power 
 plants utilize resources. For now exist five types of power plants and five types 
 of resources. They can be split on renewable and non-renewable. User is capable 
-to buy non-renewable resources.
+to buy only non-renewable resources.
 
 ## Technologies
-Project is created with:
+Project was created with:
 * Java version: 11
 * Servlet API version: 3.0
 
