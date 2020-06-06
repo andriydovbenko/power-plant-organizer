@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.electricity.enumeration.AppViewPath.LOGIN;
-import static com.electricity.enumeration.AppViewPath.LOGOUT;
+import static com.electricity.enumeration.path.AppViewPath.LOGIN;
+import static com.electricity.enumeration.path.AppViewPath.LOGOUT;
 
 @WebServlet(name = "LogOutServlet", urlPatterns = "/in/home/logout")
 public class LogOutServlet extends HttpServlet {

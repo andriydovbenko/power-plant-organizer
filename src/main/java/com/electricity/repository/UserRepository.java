@@ -14,9 +14,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static com.electricity.enumeration.Driver.POSTGRES;
-import static com.electricity.enumeration.TableName.USER;
-import static com.electricity.enumeration.UserColumnName.*;
+import static com.electricity.enumeration.path.Driver.POSTGRES;
+import static com.electricity.enumeration.repo.TableName.USER;
+import static com.electricity.enumeration.repo.UserColumnName.*;
 
 public class UserRepository {
     private static final Logger LOGGER = LogManager.getLogger(UserRepository.class);

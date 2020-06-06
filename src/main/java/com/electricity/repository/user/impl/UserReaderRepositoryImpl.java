@@ -8,9 +8,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 
-import static com.electricity.enumeration.Driver.POSTGRES;
-import static com.electricity.enumeration.TableName.USER;
-import static com.electricity.enumeration.UserColumnName.*;
+import static com.electricity.enumeration.path.Driver.POSTGRES;
+import static com.electricity.enumeration.repo.TableName.USER;
+import static com.electricity.enumeration.repo.UserColumnName.*;
 
 public class UserReaderRepositoryImpl implements UserReaderRepository {
     private static final Logger LOGGER = LogManager.getLogger(UserReaderRepositoryImpl.class);

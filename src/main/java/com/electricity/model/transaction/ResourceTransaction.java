@@ -1,6 +1,6 @@
 package com.electricity.model.transaction;
 
-import com.electricity.enumeration.PurchasableResourceType;
+import com.electricity.enumeration.resource.PurchasableResourceType;
 import com.electricity.model.resource.StorableResource;
 
 import java.math.BigDecimal;

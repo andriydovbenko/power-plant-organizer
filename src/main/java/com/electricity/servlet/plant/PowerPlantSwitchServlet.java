@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.electricity.enumeration.ContextAttribute.PLANT_ID;
+import static com.electricity.enumeration.attribute.ContextAttribute.PLANT_ID;
 
 @WebServlet(name = "PowerPlantSwitchServlet", urlPatterns = "/in/plant/switch")
 public class PowerPlantSwitchServlet extends HttpServlet {

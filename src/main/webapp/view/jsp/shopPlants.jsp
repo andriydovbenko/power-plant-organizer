@@ -1,11 +1,11 @@
 <%--suppress ELValidationInJSP --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.electricity.enumeration.PowerPlantCost" %>
+<%@ page import="com.electricity.enumeration.plant.PowerPlantCost" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="com.electricity.enumeration.PowerPlantType" %>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.COUNTRY" %>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.NUMBER_OF_EMPLOYEES" %>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.*" %>
+<%@ page import="com.electricity.enumeration.plant.PowerPlantType" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.COUNTRY" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.NUMBER_OF_EMPLOYEES" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.*" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +44,7 @@
                     Plant</a>
             </li>
             <li class="nav-item">
-                <a href="http://localhost:8080/in/home">Return back</a>
+                <a href="${pageContext.request.contextPath}/in/home">Return back</a>
             </li>
 
         </ul>

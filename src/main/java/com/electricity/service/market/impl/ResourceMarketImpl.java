@@ -1,6 +1,6 @@
 package com.electricity.service.market.impl;
 
-import com.electricity.enumeration.PurchasableResourceType;
+import com.electricity.enumeration.resource.PurchasableResourceType;
 import com.electricity.exeption.UnknownResourceTypeException;
 import com.electricity.model.resource.storable.Coal;
 import com.electricity.model.resource.storable.Uranium;
@@ -12,8 +12,8 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static com.electricity.enumeration.ResourcePrice.COAL;
-import static com.electricity.enumeration.ResourcePrice.URANIUM;
+import static com.electricity.enumeration.resource.ResourcePrice.COAL;
+import static com.electricity.enumeration.resource.ResourcePrice.URANIUM;
 
 public class ResourceMarketImpl implements ResourceMarket {
     private final Map<PurchasableResourceType, ResourceMarket> transactionMethods;

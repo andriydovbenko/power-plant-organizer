@@ -10,9 +10,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static com.electricity.enumeration.Driver.POSTGRES;
-import static com.electricity.enumeration.TableName.*;
-import static com.electricity.enumeration.UserColumnName.*;
+import static com.electricity.enumeration.path.Driver.POSTGRES;
+import static com.electricity.enumeration.repo.TableName.*;
+import static com.electricity.enumeration.repo.UserColumnName.*;
 
 public class UserWriterRepositoryImpl implements UserWriterRepository {
     private static final Logger LOGGER = LogManager.getLogger(UserWriterRepositoryImpl.class);

@@ -1,8 +1,8 @@
 package com.electricity.model.plant.impl;
 
-import com.electricity.enumeration.MaxPower;
-import com.electricity.enumeration.PowerPlantType;
-import com.electricity.enumeration.ResourceConsumption;
+import com.electricity.enumeration.plant.MaxPower;
+import com.electricity.enumeration.plant.PowerPlantType;
+import com.electricity.enumeration.plant.ResourceConsumption;
 import com.electricity.model.plant.StorageCapableAbstractPlant;
 import com.electricity.model.storage.impl.WaterReservoir;
 

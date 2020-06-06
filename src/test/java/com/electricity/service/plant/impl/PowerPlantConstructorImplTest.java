@@ -1,7 +1,7 @@
 package com.electricity.service.plant.impl;
 
-import com.electricity.enumeration.PowerPlantType;
-import com.electricity.enumeration.ResourceConsumption;
+import com.electricity.enumeration.plant.PowerPlantType;
+import com.electricity.enumeration.plant.ResourceConsumption;
 import com.electricity.exeption.UnknownPowerPlantTypeException;
 import com.electricity.model.dto.impl.PowerPlantCreatingDto;
 import com.electricity.model.plant.PowerPlant;

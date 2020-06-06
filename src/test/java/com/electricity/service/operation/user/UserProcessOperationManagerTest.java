@@ -1,7 +1,7 @@
 package com.electricity.service.operation.user;
 
-import com.electricity.enumeration.PowerPlantType;
-import com.electricity.enumeration.PurchasableResourceType;
+import com.electricity.enumeration.plant.PowerPlantType;
+import com.electricity.enumeration.resource.PurchasableResourceType;
 import com.electricity.model.dto.impl.PowerPlantCreatingDto;
 import com.electricity.model.plant.impl.CoalFiredPowerPlant;
 import com.electricity.model.storage.impl.CoalStorage;

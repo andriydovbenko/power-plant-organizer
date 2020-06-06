@@ -1,6 +1,6 @@
 package com.electricity.servlet.shop;
 
-import com.electricity.enumeration.PowerPlantType;
+import com.electricity.enumeration.plant.PowerPlantType;
 import com.electricity.model.dto.impl.PowerPlantCreatingDto;
 import com.electricity.model.user.User;
 import com.electricity.service.converter.StringConverterIntoPlantType;
@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.electricity.enumeration.AppViewPath.SHOP_PLANTS;
-import static com.electricity.enumeration.ContextAttribute.*;
+import static com.electricity.enumeration.path.AppViewPath.SHOP_PLANTS;
+import static com.electricity.enumeration.attribute.ContextAttribute.*;
 
 @WebServlet(name = "PowerPlantShopServlet", urlPatterns = "/in/home/shop/plant")
 public class PowerPlantShopServlet extends HttpServlet {

@@ -1,6 +1,6 @@
 package com.electricity.service.converter;
 
-import com.electricity.enumeration.PurchasableResourceType;
+import com.electricity.enumeration.resource.PurchasableResourceType;
 
 import java.util.ArrayList;
 import java.util.List;

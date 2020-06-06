@@ -1,7 +1,7 @@
 package com.electricity.service.plant.impl;
 
-import com.electricity.enumeration.PowerPlantCost;
-import com.electricity.enumeration.PowerPlantType;
+import com.electricity.enumeration.plant.PowerPlantCost;
+import com.electricity.enumeration.plant.PowerPlantType;
 import com.electricity.exeption.UnknownPowerPlantTypeException;
 import com.electricity.service.plant.PowerPlantPriceSetterService;
 import org.junit.jupiter.api.DynamicTest;

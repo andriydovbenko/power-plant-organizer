@@ -1,4 +1,4 @@
-package com.electricity.enumeration;
+package com.electricity.enumeration.path;
 
 public enum AppViewPath {
     REGISTER("/view/jsp/register.jsp"),

@@ -1,6 +1,6 @@
 package com.electricity.service.plant.impl;
 
-import com.electricity.enumeration.PowerPlantType;
+import com.electricity.enumeration.plant.PowerPlantType;
 import com.electricity.exeption.UnknownPowerPlantTypeException;
 import com.electricity.service.plant.PowerPlantPriceSetterService;
 
@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static com.electricity.enumeration.PowerPlantCost.*;
+import static com.electricity.enumeration.plant.PowerPlantCost.*;
 
 public class PowerPlantPriceSetterServiceImpl implements PowerPlantPriceSetterService {
     private final Map<PowerPlantType, PowerPlantPriceSetterService> priceGettingMethods;

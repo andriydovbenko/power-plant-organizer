@@ -1,4 +1,4 @@
-package com.electricity.enumeration;
+package com.electricity.enumeration.plant;
 
 public enum ResourceConsumption {
     HYDRO(50_000),

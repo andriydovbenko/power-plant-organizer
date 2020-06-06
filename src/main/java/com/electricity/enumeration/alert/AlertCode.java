@@ -1,4 +1,4 @@
-package com.electricity.enumeration;
+package com.electricity.enumeration.alert;
 
 public enum  AlertCode {
     INCORRECT_LOGIN,

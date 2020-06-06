@@ -7,7 +7,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-import static com.electricity.enumeration.ContextAttribute.USER_SESSION;
+import static com.electricity.enumeration.attribute.ContextAttribute.USER_SESSION;
 
 public class UserSessionServiceImpl implements UserSessionService {
     private Cookie logCookie;

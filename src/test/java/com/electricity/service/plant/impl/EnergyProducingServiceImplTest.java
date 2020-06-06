@@ -1,7 +1,7 @@
 package com.electricity.service.plant.impl;
 
-import com.electricity.enumeration.MaxPower;
-import com.electricity.enumeration.ResourceConsumption;
+import com.electricity.enumeration.plant.MaxPower;
+import com.electricity.enumeration.plant.ResourceConsumption;
 import com.electricity.model.plant.impl.*;
 import com.electricity.model.resource.storable.Coal;
 import com.electricity.model.resource.storable.Uranium;

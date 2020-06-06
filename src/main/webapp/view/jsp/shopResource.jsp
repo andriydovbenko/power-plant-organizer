@@ -1,13 +1,13 @@
 <%--suppress ELValidationInJSP --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.electricity.enumeration.PurchasableResourceType" %>
+<%@ page import="com.electricity.enumeration.resource.PurchasableResourceType" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="com.electricity.enumeration.ResourcePrice" %>
+<%@ page import="com.electricity.enumeration.resource.ResourcePrice" %>
 <%@ page import="com.electricity.model.storage.impl.CoalStorage" %>
 <%@ page import="com.electricity.model.storage.impl.UraniumStorage" %>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.PLANT_ID" %>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.RESOURCE_TYPE" %>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.*" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.PLANT_ID" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.RESOURCE_TYPE" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.*" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +34,7 @@
                     Plants</a>
             </li>
             <li class="nav-item">
-                <a href="http://localhost:8080/in/home">Return back</a>
+                <a href="${pageContext.request.contextPath}/in/home">Return back</a>
             </li>
 
         </ul>
@@ -48,7 +48,7 @@
                             <p><b>Current funds: </b><fmt:formatNumber type="number" groupingUsed="false"
                                                                        value="${requestScope.user.currentFundsAmount}"/>
                             </p>
-                            <p><b>Uranium price per item: </b><c:out value="<%=ResourcePrice.COAL.getPrice()%>"/>
+                            <p><b>Coal price per item: </b><c:out value="<%=ResourcePrice.COAL.getPrice()%>"/>
                             </p>
                         </div>
                     </div>

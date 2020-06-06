@@ -1,4 +1,4 @@
-package com.electricity.enumeration;
+package com.electricity.enumeration.repo;
 
 public enum TableName {
     POWER_PLANT("power_plant"),

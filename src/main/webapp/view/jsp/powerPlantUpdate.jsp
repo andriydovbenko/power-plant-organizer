@@ -1,9 +1,9 @@
 <%--suppress HtmlFormInputWithoutLabel --%>
 <%--suppress ELValidationInJSP --%>
-<%@ page import="com.electricity.enumeration.ContextAttribute" %>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.NUMBER_OF_EMPLOYEES" %>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.COUNTRY" %>
-<%@ page import="static com.electricity.enumeration.ContextAttribute.*" %>
+<%@ page import="com.electricity.enumeration.attribute.ContextAttribute" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.NUMBER_OF_EMPLOYEES" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.COUNTRY" %>
+<%@ page import="static com.electricity.enumeration.attribute.ContextAttribute.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -106,7 +106,7 @@
             <button type="submit" class="btn btn-success btn-lg btn-block">Save</button>
         </div>
     </form>
-    <h4 class="text-center"><a href="http://localhost:8080/in/plants">return back</a></h4>
+    <h4 class="text-center"><a href="${pageContext.request.contextPath}/in/plants">return back</a></h4>
 </div>
 </body>
 <style>

@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Base64;
 
-import static com.electricity.enumeration.AESData.*;
+import static com.electricity.enumeration.attribute.AESData.*;
 
 public class PasswordCryptographer {
     private static final Logger LOGGER = LogManager.getLogger(PasswordCryptographer.class);

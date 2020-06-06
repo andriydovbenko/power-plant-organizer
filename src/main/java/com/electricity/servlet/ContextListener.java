@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.electricity.enumeration.ContextAttribute.*;
+import static com.electricity.enumeration.attribute.ContextAttribute.*;
 
 @WebListener()
 public class ContextListener implements ServletContextListener {

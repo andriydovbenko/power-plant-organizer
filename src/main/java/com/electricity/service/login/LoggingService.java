@@ -1,6 +1,6 @@
 package com.electricity.service.login;
 
-import com.electricity.enumeration.ContextAttribute;
+import com.electricity.enumeration.attribute.ContextAttribute;
 import com.electricity.model.user.User;
 import com.electricity.repository.UserRepository;
 import com.electricity.service.password.encryption.PasswordCryptographer;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.electricity.enumeration.ContextAttribute.*;
+import static com.electricity.enumeration.attribute.ContextAttribute.*;
 
 public class LoggingService {
 

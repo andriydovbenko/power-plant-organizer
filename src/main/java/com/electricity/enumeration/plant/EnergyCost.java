@@ -1,4 +1,4 @@
-package com.electricity.enumeration;
+package com.electricity.enumeration.plant;
 
 import java.math.BigDecimal;
 

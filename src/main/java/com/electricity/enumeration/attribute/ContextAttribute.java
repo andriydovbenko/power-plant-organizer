@@ -1,4 +1,4 @@
-package com.electricity.enumeration;
+package com.electricity.enumeration.attribute;
 
 public enum ContextAttribute {
     AMOUNT("amount"),
